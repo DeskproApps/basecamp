@@ -18,7 +18,7 @@ const baseRequest: Request = async (client, {
   const baseUrl = rawUrl ? rawUrl : `${BASE_URL}${url}`;
   const params = getQueryParams(queryParams);
 
-  const requestUrl = `${baseUrl}${params}`;
+  const requestUrl = `${baseUrl}.json${isEmpty(params) ? "": `?${params}`}`;
   const options: RequestInit = {
     method,
     headers: {

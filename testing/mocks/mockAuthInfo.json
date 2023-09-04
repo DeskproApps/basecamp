@@ -1,0 +1,19 @@
+{
+  "expires_at": "2023-09-18T13:20:13.000Z",
+  "identity": {
+    "id": 501,
+    "email_address": "ilia.makarov@me.com",
+    "first_name": "ilia",
+    "last_name": "makarov"
+  },
+  "accounts": [
+    {
+      "id": 101,
+      "name": "Deskpro",
+      "product": "bc3",
+      "href": "https://3.basecampapi.com/101",
+      "app_href": "https://3.basecamp.com/101",
+      "hidden": false
+    }
+  ]
+}

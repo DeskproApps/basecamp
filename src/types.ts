@@ -1,6 +1,7 @@
 import type { To, ParamKeyValuePair } from "react-router-dom";
 import type { DropdownValueType } from "@deskpro/deskpro-ui";
 import type { Context, IDeskproClient } from "@deskpro/app-sdk";
+import type { Response } from "./services/basecamp/types";
 
 /** Common types */
 export type Maybe<T> = T | undefined | null;
@@ -27,11 +28,12 @@ export type RequestParams = {
 export type Request = <T>(
   client: IDeskproClient,
   params: RequestParams,
-) => Promise<T>;
+) => Response<T>;
 
 /** Deskpro types */
 export type Settings = {
-  //..
+  client_id?: string,
+  client_secret?: string,
 };
 
 export type TicketData = object;
