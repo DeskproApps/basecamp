@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512px" height="512px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="basecamp" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="basecamp-logo-2019-1" transform="translate(0.000000, 5.000000)">
+            <path d="M54.491,213.137 C86.431,122.927 147.383,18.09 270.385,18.09 C393.387,18.09 454.217,179.857 461.897,289.57" id="Path" stroke="#1D2D35" stroke-width="41.57" stroke-linecap="round" stroke-linejoin="round"></path>
+            <polygon id="Path" fill="#FFE000" fill-rule="nonzero" opacity="0.4" points="511.025 351.011 144.579 501.93 0 151.088 66.072 123.781 366.446 0.17"></polygon>
+            <polygon id="Path" fill="#FFE000" fill-rule="nonzero" points="493.836 390.752 105.813 470.966 28.891 99.278 94.111 85.747 417.036 19.065"></polygon>
+            <path d="M270.385,17.846 C393.387,17.846 454.217,179.857 461.897,289.571 C429.592,345.648 352.183,366.737 270.385,366.737 C203.216417,367.971184 138.864759,339.781144 94.232,289.571 C94.232,289.571 132.754,185.587 168.716,185.343 C195.048,185.343 217.478,234.105 238.568,234.105 C259.658,234.105 303.421,140.482 303.421,140.482" id="Path" stroke="#1D2D35" stroke-width="41.57" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+    </g>
+</svg>
