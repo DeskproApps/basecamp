@@ -11,8 +11,6 @@ export const APP_PREFIX = "basecamp";
 
 export const ENTITY = "linkedBasecampCard";
 
-export const DEFAULT_ERROR = "There was an error!"
-
 export const ACCESS_TOKEN_PATH = "oauth2/access_token";
 
 export const placeholders = {
@@ -20,6 +18,8 @@ export const placeholders = {
   CLIENT_ID: "__client_id__",
   CLIENT_SECRET: "__client_secret__",
 };
+
+export const DEFAULT_ERROR = "There was an error!"
 
 /** Basecamp */
 export const BASE_URL = "https://3.basecampapi.com";
