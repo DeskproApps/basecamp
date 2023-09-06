@@ -50,14 +50,8 @@ jest.mock("@deskpro/app-sdk", () => ({
       /* eslint-disable-next-line react-hooks/exhaustive-deps */
     }, deps);
   },
-  useInitialisedDeskproAppClient: (
-    callback: (param: Record<string, unknown>) => void
-  ) => {
-    callback({
-      registerElement: () => {},
-      deregisterElement: () => {},
-      setTitle: () => {},
-    });
+  useInitialisedDeskproAppClient: (callback: (param: typeof mockClient) => void) => {
+    callback(mockClient);
   },
   useDeskproLatestAppContext: () => ({ context }),
   useDeskproAppTheme: () => ({ theme: lightTheme }),

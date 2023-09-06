@@ -19,6 +19,8 @@ export const placeholders = {
   CLIENT_SECRET: "__client_secret__",
 };
 
+export const DEFAULT_ERROR = "There was an error!"
+
 /** Basecamp */
 export const BASE_URL = "https://3.basecampapi.com";
 export const AUTH_URL = "https://launchpad.37signals.com/authorization";
