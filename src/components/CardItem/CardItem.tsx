@@ -20,7 +20,7 @@ import type { Card, Account, Project } from "../../services/basecamp/types";
 
 type Props = {
   card: Card,
-  projects: Project[],
+  projects: Maybe<Project[]>,
   account: Maybe<Account>,
   onClickTitle?: () => void,
 };

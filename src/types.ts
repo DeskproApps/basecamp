@@ -1,7 +1,7 @@
 import type { To, ParamKeyValuePair } from "react-router-dom";
 import type { DropdownValueType } from "@deskpro/deskpro-ui";
 import type { Context, IDeskproClient } from "@deskpro/app-sdk";
-import type { Response, Project, Dock } from "./services/basecamp/types";
+import type { Response, Project, Dock, Account, Card } from "./services/basecamp/types";
 
 /** Common types */
 export type Maybe<T> = T | undefined | null;
@@ -56,6 +56,14 @@ export type EventPayload =
 ;
 
 /** Entities */
+export type CardMetaAsString = string;
+
+export type CardMeta = {
+  accountId: Account["id"],
+  projectId: Project["id"],
+  cardId: Card["id"],
+};
+
 export type CardTable = {
   id: Dock["id"],
   name: Dock["title"],
