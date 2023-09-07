@@ -1,5 +1,6 @@
 import "regenerator-runtime/runtime";
 import "@testing-library/jest-dom/extend-expect";
+import "intersection-observer";
 import { useQuery } from "@tanstack/react-query";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
