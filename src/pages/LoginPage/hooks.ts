@@ -71,11 +71,17 @@ const useLogin = (): Result => {
       .then(({ token }) => getAccessTokenService(client, token, callback.callbackUrl))
       .then(({ access_token }) => setAccessTokenService(client, access_token))
       .then(() => getAuthInfoService(client))
-      .then(() => getEntityListService(client, ticketId))
+      .then((info) => {
+        if (!get(info, ["identity", "id"])) {
+          return Promise.reject(new Error("No identity found"));
+        } else {
+          return getEntityListService(client, ticketId)
+        }
+      })
       .then((entityIds) => navigate(size(entityIds) ? "/home" : "/cards/link"))
       .catch((err) => {
         setIsLoading(false);
-        setError(get(err, ["data", "error"], DEFAULT_ERROR));
+        setError(get(err, ["data", "error"]) || get(err, ["message"]) || DEFAULT_ERROR);
       });
   }, [client, callback, navigate, ticketId]);
 

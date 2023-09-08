@@ -1,5 +1,5 @@
 {
-  "expires_at": "2023-09-18T13:20:13.000Z",
+  "expires_at": "2023-09-19T10:47:27.000Z",
   "identity": {
     "id": 501,
     "email_address": "ilia.makarov@me.com",
@@ -13,6 +13,14 @@
       "product": "bc3",
       "href": "https://3.basecampapi.com/101",
       "app_href": "https://3.basecamp.com/101",
+      "hidden": false
+    },
+    {
+      "id": 102,
+      "name": "Self-owned",
+      "product": "bc3",
+      "href": "https://3.basecampapi.com/102",
+      "app_href": "https://3.basecamp.com/102",
       "hidden": false
     }
   ]

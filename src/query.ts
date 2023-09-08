@@ -11,7 +11,11 @@ const queryClient = new QueryClient({
 });
 
 const QueryKey = {
-  //...
+  ACCOUNTS: "accounts",
+  PROJECTS: "projects",
+  TABLE: "table",
+  CARD: "card",
+  CARDS: "cards",
 }
 
 export { queryClient, QueryKey };

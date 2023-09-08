@@ -10,7 +10,7 @@ type Props = Omit<FallbackProps, "error"> & {
   error: Error,
 };
 
-const ErrorFallback: FC<Props> = ({error}) => {
+const ErrorFallback: FC<Props> = ({ error }) => {
   let message = DEFAULT_ERROR;
   const button = null;
 
