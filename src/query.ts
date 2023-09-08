@@ -16,6 +16,7 @@ const QueryKey = {
   TABLE: "table",
   CARD: "card",
   CARDS: "cards",
+  LINKED_CARDS: "linkedCard",
 }
 
 export { queryClient, QueryKey };

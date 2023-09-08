@@ -4,3 +4,4 @@ export { getAuthInfoService } from "./getAuthInfoService";
 export { getProjectsService } from "./getProjectsService";
 export { getCardTableService } from "./getCardTableService";
 export { getCardsService } from "./getCardsService";
+export { getCardService } from "./getCardService";

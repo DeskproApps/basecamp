@@ -8,6 +8,7 @@ import {
   useDeskproAppClient,
   useDeskproAppEvents,
 } from "@deskpro/app-sdk";
+import { useLogout } from "./hooks";
 import { isNavigatePayload } from "./utils";
 import {
   HomePage,
@@ -23,6 +24,7 @@ const App: FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { client } = useDeskproAppClient();
+  const { logout, isLoading } = useLogout();
   const isAdmin = useMemo(() => pathname.includes("/admin/"), [pathname]);
 
   useDeskproElements(({ registerElement }) => {
@@ -36,6 +38,7 @@ const App: FC = () => {
           navigate(payload.path);
         }
       })
+      .with("logout", logout)
       .run();
   }, 500);
 
@@ -48,7 +51,7 @@ const App: FC = () => {
     onElementEvent: debounceElementEvent,
   }, [client]);
 
-  if (!client) {
+  if (!client || isLoading) {
     return (
       <LoadingSpinner/>
     );
