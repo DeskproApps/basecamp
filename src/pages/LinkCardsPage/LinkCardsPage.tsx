@@ -67,8 +67,8 @@ const LinkCardsPage: FC = () => {
 
     return Promise.all([
       ...selectedCards.map((card) => {
-        const cardData = entity.generateId(account, card);
-        return !cardData ? Promise.resolve() : setEntityService(client, ticketId, cardData);
+        const cardMeta = entity.generateId(account, card);
+        return !cardMeta ? Promise.resolve() : setEntityService(client, ticketId, cardMeta);
       })
     ])
       .then(() => navigate("/home"))

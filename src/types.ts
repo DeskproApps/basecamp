@@ -50,9 +50,14 @@ export type TicketContext = Context<TicketData, Maybe<Settings>>;
 
 export type NavigateToChangePage = { type: "changePage", path: To };
 
+export type LogoutPayload = { type: "logout" };
+
+export type UnlinkPayload = { type: "unlink", card: Card, meta: CardMeta };
+
 export type EventPayload =
   | NavigateToChangePage
-  | { type: "logout" }
+  | LogoutPayload
+  | UnlinkPayload
 ;
 
 /** Entities */

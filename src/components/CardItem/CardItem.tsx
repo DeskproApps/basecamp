@@ -1,6 +1,5 @@
-import { useMemo, useCallback } from "react";
+import { useCallback } from "react";
 import get from "lodash/get";
-import find from "lodash/find";
 import {
   Title,
   Property,
@@ -20,20 +19,23 @@ import type { Card, Account, Project } from "../../services/basecamp/types";
 
 type Props = {
   card: Card,
-  projects: Maybe<Project[]>,
+  project: Maybe<Project>,
   account: Maybe<Account>,
-  onClickTitle?: () => void,
+  onClickTitle?: (accountId: Account["id"], projectId: Project["id"], cardId: Card["id"]) => void,
 };
 
-const CardItem: FC<Props> = ({ card, account, projects, onClickTitle }) => {
+const CardItem: FC<Props> = ({ card, account, project, onClickTitle }) => {
   const onClick: MouseEventHandler<HTMLAnchorElement> = useCallback((e) => {
     e.preventDefault();
-    onClickTitle && onClickTitle();
-  }, [onClickTitle]);
 
-  const project = useMemo(() => {
-    return find(projects, { id: get(card, ["bucket", "id"]) });
-  }, [projects, card]);
+    const cardId = get(card, ["id"]);
+    const accountId = get(account, ["id"]);
+    const projectId = get(project, ["id"]);
+
+    if (onClickTitle && accountId && projectId && cardId) {
+      onClickTitle(accountId, projectId, cardId);
+    }
+  }, [onClickTitle, account, project, card]);
 
   return (
     <>

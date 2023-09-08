@@ -14,9 +14,14 @@ export type Props = {
   cardsMeta?: Maybe<CardMeta[]>,
   accounts?: Maybe<Account[]>,
   projects?: Maybe<Project[]>,
+  onNavigateToCard: (
+    accountId: Account["id"],
+    projectId: Project["id"],
+    cardId: Card["id"],
+  ) => void,
 };
 
-const Home: FC<Props> = ({ cards, accounts, projects, cardsMeta }) => {
+const Home: FC<Props> = ({ cards, accounts, projects, cardsMeta, onNavigateToCard }) => {
   return (
     <Container>
       {!Array.isArray(cards)
@@ -28,8 +33,9 @@ const Home: FC<Props> = ({ cards, accounts, projects, cardsMeta }) => {
             <Fragment key={card.id}>
               <CardItem
                 card={card}
+                onClickTitle={onNavigateToCard}
                 account={find(accounts, { id: get(find(cardsMeta, { cardId: card.id }), "accountId") })}
-                projects={projects}
+                project={find(projects, { id: get(card, ["bucket", "id"]) })}
               />
               <HorizontalDivider style={{ margin: "10px 0" }}/>
             </Fragment>

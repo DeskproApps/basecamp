@@ -1,7 +1,6 @@
 export { Button, AnchorButton } from "./Button";
 export { ErrorBlock } from "./ErrorBlock";
 export { Container } from "./Layout";
-export { Invalid } from "./Typography";
 export { Search } from "./Search";
 export { Label } from "./Label";
 export { Select } from "./Select";
@@ -9,5 +8,8 @@ export { NoFound } from "./NoFound";
 export { Card } from "./Card";
 export { BasecampLogo } from "./BasecampLogo";
 export { Link, LinkIcon } from "./Link";
-export { TextWithLink } from "./TextWithLink";
 export { DeskproTickets } from "./DeskproTickets";
+export { Member } from "./Member";
+export { Invalid, TextWithLink, DPNormalize } from "./Typography";
+export { ChecklistItem } from "./ChecklistItem";
+export { Comment } from "./Comment";
