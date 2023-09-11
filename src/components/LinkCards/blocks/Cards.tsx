@@ -7,6 +7,8 @@ import { NoFound, Card } from "../../common";
 import type { FC } from "react";
 import type { Maybe } from "../../../types";
 import type { Card as CardType, Account, Project } from "../../../services/basecamp/types";
+import find from "lodash/find";
+import get from "lodash/get";
 
 type Props = {
   cards: CardType[],
@@ -54,7 +56,7 @@ const Cards: FC<Props> = ({
                   <CardItem
                     card={card}
                     account={account}
-                    projects={projects}
+                    project={find(projects, { id: get(card, ["bucket", "id"]) })}
                     onClickTitle={() => onChangeSelectedCard(card)}
                   />
                 </Card.Body>

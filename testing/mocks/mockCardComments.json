@@ -1,0 +1,104 @@
+[
+  {
+    "id": 6530141324,
+    "status": "active",
+    "visible_to_clients": false,
+    "created_at": "2023-09-08T14:45:33.440Z",
+    "updated_at": "2023-09-08T14:45:33.440Z",
+    "title": "Re: Research",
+    "inherits_status": true,
+    "type": "Comment",
+    "url": "https://3.basecampapi.com/101/buckets/201/comments/6530141324.json",
+    "app_url": "https://3.basecamp.com/101/buckets/201/card_tables/cards/6507640630#__recording_6530141324",
+    "bookmark_url": "https://3.basecampapi.com/101/my/bookmarks/BAh7CEkiCGdpZAY6BkVUSSIuZ2lkOi8vYmMzL1JlY29yZGluZy82NTMwMTQxMzI0P2V4cGlyZXNfaW4GOwBUSSIMcHVycG9zZQY7AFRJIg1yZWFkYWJsZQY7AFRJIg9leHBpcmVzX2F0BjsAVDA=--4161690273f646c1c03260db90fb4d2b018b97b5.json",
+    "parent": {
+      "id": 6507640630,
+      "title": "Research",
+      "type": "Kanban::Card",
+      "url": "https://3.basecampapi.com/101/buckets/201/card_tables/cards/6507640630.json",
+      "app_url": "https://3.basecamp.com/101/buckets/201/card_tables/cards/6507640630"
+    },
+    "bucket": {
+      "id": 201,
+      "name": "Deskpro Apps Lab",
+      "type": "Project"
+    },
+    "creator": {
+      "id": 44506585,
+      "attachable_sgid": "BAh7CEkiCGdpZAY6BkVUSSIpZ2lkOi8vYmMzL1BlcnNvbi80NDUwNjU4NT9leHBpcmVzX2luBjsAVEkiDHB1cnBvc2UGOwBUSSIPYXR0YWNoYWJsZQY7AFRJIg9leHBpcmVzX2F0BjsAVDA=--3ea94544114c6859de0e97bc78ccd56800ffa922",
+      "name": "ilia makarov",
+      "email_address": "ilia.makarov@me.com",
+      "personable_type": "User",
+      "title": "Frontend Developer",
+      "bio": "",
+      "location": "Ukraine",
+      "created_at": "2023-09-01T08:05:05.065Z",
+      "updated_at": "2023-09-01T09:03:44.293Z",
+      "admin": true,
+      "owner": true,
+      "client": false,
+      "employee": true,
+      "time_zone": "Europe/Kiev",
+      "avatar_url": "https://bc3-production-assets-cdn.basecamp-static.com/101/people/BAhpBNkdpwI=--d7ad7ced798a3602f2c64293d11d931870b73592/avatar?v=1",
+      "company": {
+        "id": 3460388,
+        "name": "Deskpro"
+      },
+      "can_ping": true,
+      "can_manage_projects": true,
+      "can_manage_people": true
+    },
+    "content": "<div>First comment</div>"
+  },
+  {
+    "id": 6530175561,
+    "status": "active",
+    "visible_to_clients": false,
+    "created_at": "2023-09-08T14:52:51.831Z",
+    "updated_at": "2023-09-08T14:52:51.831Z",
+    "title": "Re: Research",
+    "inherits_status": true,
+    "type": "Comment",
+    "url": "https://3.basecampapi.com/101/buckets/201/comments/6530175561.json",
+    "app_url": "https://3.basecamp.com/101/buckets/201/card_tables/cards/6507640630#__recording_6530175561",
+    "bookmark_url": "https://3.basecampapi.com/101/my/bookmarks/BAh7CEkiCGdpZAY6BkVUSSIuZ2lkOi8vYmMzL1JlY29yZGluZy82NTMwMTc1NTYxP2V4cGlyZXNfaW4GOwBUSSIMcHVycG9zZQY7AFRJIg1yZWFkYWJsZQY7AFRJIg9leHBpcmVzX2F0BjsAVDA=--982cace3d9b191cc3f85f74a7ccad9f0a17c874c.json",
+    "parent": {
+      "id": 6507640630,
+      "title": "Research",
+      "type": "Kanban::Card",
+      "url": "https://3.basecampapi.com/101/buckets/201/card_tables/cards/6507640630.json",
+      "app_url": "https://3.basecamp.com/101/buckets/201/card_tables/cards/6507640630"
+    },
+    "bucket": {
+      "id": 201,
+      "name": "Deskpro Apps Lab",
+      "type": "Project"
+    },
+    "creator": {
+      "id": 44506585,
+      "attachable_sgid": "BAh7CEkiCGdpZAY6BkVUSSIpZ2lkOi8vYmMzL1BlcnNvbi80NDUwNjU4NT9leHBpcmVzX2luBjsAVEkiDHB1cnBvc2UGOwBUSSIPYXR0YWNoYWJsZQY7AFRJIg9leHBpcmVzX2F0BjsAVDA=--3ea94544114c6859de0e97bc78ccd56800ffa922",
+      "name": "ilia makarov",
+      "email_address": "ilia.makarov@me.com",
+      "personable_type": "User",
+      "title": "Frontend Developer",
+      "bio": "",
+      "location": "Ukraine",
+      "created_at": "2023-09-01T08:05:05.065Z",
+      "updated_at": "2023-09-01T09:03:44.293Z",
+      "admin": true,
+      "owner": true,
+      "client": false,
+      "employee": true,
+      "time_zone": "Europe/Kiev",
+      "avatar_url": "https://bc3-production-assets-cdn.basecamp-static.com/101/people/BAhpBNkdpwI=--d7ad7ced798a3602f2c64293d11d931870b73592/avatar?v=1",
+      "company": {
+        "id": 3460388,
+        "name": "Deskpro"
+      },
+      "can_ping": true,
+      "can_manage_projects": true,
+      "can_manage_people": true
+    },
+    "content": "<div>Lorem <strong>ipsum</strong> <em>dolor</em> <strong><em>sit</em></strong> <del>amet</del>, <span style=\"color: rgb(5, 98, 185);\">consectetur</span> <span style=\"background-color: rgb(250, 247, 133);\">adipisicing</span> elit.<br><br></div><ul><li>Beatae blanditiis</li><li>consequatur deserunt</li><li>dignissimos esse fuga hic id,</li></ul><ol><li>minus nam nulla optio</li><li>qui quod sed sint</li><li>temporibus totam vel vero voluptas?</li></ol><div><br></div><pre>&lt;Title title=\"Comments (3)\" /&gt;</pre><div><br></div><blockquote>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</blockquote><div><br>Here is the raw link: <a target=\"_blank\" rel=\"noreferrer\" class=\"autolinked\" data-behavior=\"truncate\" href=\"https://google.com\">https://google.com</a><br>Here is the WYSIWYG link: <a href=\"https://www.deskpro.com/apps\" target=\"_blank\" rel=\"noreferrer\">https://www.deskpro.com/apps</a></div>"
+  }
+]

@@ -200,3 +200,23 @@ export type Card = {
   comment_count: number,
   steps: CardStep[]
 };
+
+export type CardComment = {
+  id: number,
+  status: string, // "active",
+  visible_to_clients: boolean,
+  created_at: DateTime,
+  updated_at: DateTime,
+  title: string,
+  inherits_status: boolean,
+  type: "Comment",
+  url: string,
+  app_url: string,
+  bookmark_url: string,
+  parent: Pick<Card, "id"|"title"|"type"|"url"|"app_url">,
+  bucket: Pick<Project, "id"|"name"> & {
+    type: "Project"
+  },
+  creator: Person,
+  content: string,
+};

@@ -18,10 +18,10 @@ const filterCards = (cards: Card[], options: Maybe<Options> = {}): Card[] => {
 
   if (query) {
     filteredCards = cards.filter(({ id, title }) => {
-      const issueTitle = toLower(title);
+      const cardTitle = toLower(title);
       const search = toLower(query);
 
-      return issueTitle.includes(search) || `${id}`.includes(search);
+      return cardTitle.includes(search) || `${id}`.includes(search);
     })
   }
 

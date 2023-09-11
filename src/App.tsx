@@ -8,11 +8,12 @@ import {
   useDeskproAppClient,
   useDeskproAppEvents,
 } from "@deskpro/app-sdk";
-import { useLogout } from "./hooks";
-import { isNavigatePayload } from "./utils";
+import { useLogout, useUnlinkCard } from "./hooks";
+import { isNavigatePayload, isUnlinkPayload } from "./utils";
 import {
   HomePage,
   LoginPage,
+  ViewCardPage,
   LinkCardsPage,
   LoadingAppPage,
   AdminCallbackPage,
@@ -24,8 +25,10 @@ const App: FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { client } = useDeskproAppClient();
-  const { logout, isLoading } = useLogout();
+  const { logout, isLoading: isLoadingLogout } = useLogout();
+  const { unlink, isLoading: isLoadingUnlink } = useUnlinkCard();
   const isAdmin = useMemo(() => pathname.includes("/admin/"), [pathname]);
+  const isLoading = [isLoadingLogout, isLoadingUnlink].some((isLoading) => isLoading);
 
   useDeskproElements(({ registerElement }) => {
     registerElement("refresh", { type: "refresh_button" });
@@ -39,6 +42,11 @@ const App: FC = () => {
         }
       })
       .with("logout", logout)
+      .with("unlink", () => {
+        if (isUnlinkPayload(payload)) {
+          unlink(payload);
+        }
+      })
       .run();
   }, 500);
 
@@ -64,6 +72,7 @@ const App: FC = () => {
         <Route path="/login" element={<LoginPage/>}/>)
         <Route path="/home" element={<HomePage/>}/>)
         <Route path="/cards/link" element={<LinkCardsPage/>}/>)
+        <Route path="/cards/view" element={<ViewCardPage/>}/>)
         <Route index element={<LoadingAppPage/>} />
       </Routes>
       {!isAdmin && (<><br/><br/><br/></>)}

@@ -16,7 +16,7 @@ describe("CardItem", () => {
     const { findByText, findAllByText } = render((
       <CardItem
         card={mockCard as never}
-        projects={mockProjects as never}
+        project={mockProjects[0] as never}
         account={mockAuthInfo.accounts[0] as never}
       />
     ), { wrappers: { theme: true } });
