@@ -1,0 +1,10 @@
+{
+  "account": 101,
+  "project": 201,
+  "cardTable": 6507629791,
+  "column": 6507629798,
+  "title": "Test Card",
+  "assignees": [44506585, 44506648],
+  "dueDate": "2023-09-29T21:00:00.000Z",
+  "content": "this is description"
+}

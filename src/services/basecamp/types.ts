@@ -77,7 +77,7 @@ export type Person = {
   attachable_sgid: string,
   name: string,
   email_address: string,
-  personable_type: "User",
+  personable_type: "User"|"Integration"|"DummyUser",
   title: string, // "Frontend Developer",
   bio: string,
   location: string,

@@ -124,7 +124,7 @@ const Select = <T,>({
           ref={targetRef}
           {...targetProps}
           value={(!displayValue || isString(displayValue))
-            ? trim(displayValue as string)
+            ? trim((displayValue || "") as string)
             : (
               <Stack gap={6} wrap="wrap" style={{ marginBottom: 6 }}>{displayValue}</Stack>
             )
