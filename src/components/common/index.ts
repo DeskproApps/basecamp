@@ -13,3 +13,6 @@ export { Member } from "./Member";
 export { Invalid, TextWithLink, DPNormalize } from "./Typography";
 export { ChecklistItem } from "./ChecklistItem";
 export { Comment } from "./Comment";
+export { Navigation } from "./Navigation";
+export { TextArea } from "./TextArea";
+export { DateInput } from "./DateInput";

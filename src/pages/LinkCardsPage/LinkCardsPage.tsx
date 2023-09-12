@@ -58,6 +58,8 @@ const LinkCardsPage: FC = () => {
 
   const onCancel = useCallback(() => navigate("/home"), [navigate]);
 
+  const onNavigateToCreate = useCallback(() => navigate("/cards/create"), [navigate]);
+
   const onLinkCards = useCallback(() => {
     if (!client || !ticketId || !size(selectedCards)) {
       return;
@@ -104,6 +106,7 @@ const LinkCardsPage: FC = () => {
       selectedCardTable={selectedCardTable}
       onChangeCardTable={setSelectedCardTable}
       onChangeSelectedCard={onChangeSelectedCard}
+      onNavigateToCreate={onNavigateToCreate}
       cards={filterCards(cards, { query: searchQuery })}
     />
   );

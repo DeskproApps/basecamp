@@ -16,6 +16,7 @@ import {
   ViewCardPage,
   LinkCardsPage,
   LoadingAppPage,
+  CreateCardPage,
   AdminCallbackPage,
 } from "./pages";
 import type { FC } from "react";
@@ -73,6 +74,7 @@ const App: FC = () => {
         <Route path="/home" element={<HomePage/>}/>)
         <Route path="/cards/link" element={<LinkCardsPage/>}/>)
         <Route path="/cards/view" element={<ViewCardPage/>}/>)
+        <Route path="/cards/create" element={<CreateCardPage/>}/>)
         <Route index element={<LoadingAppPage/>} />
       </Routes>
       {!isAdmin && (<><br/><br/><br/></>)}

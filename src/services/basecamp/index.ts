@@ -7,3 +7,5 @@ export { getCardTableService } from "./getCardTableService";
 export { getCardsService } from "./getCardsService";
 export { getCardService } from "./getCardService";
 export { getCardCommentsService } from "./getCardCommentsService";
+export { getProjectPeopleService } from "./getProjectPeopleService";
+export { createCardService } from "./createCardService";

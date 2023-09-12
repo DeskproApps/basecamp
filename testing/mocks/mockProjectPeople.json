@@ -1,0 +1,52 @@
+[
+  {
+    "id": 44506585,
+    "attachable_sgid": "BAh7CEkiCGdpZAY6BkVUSSIpZ2lkOi8vYmMzL1BlcnNvbi80NDUwNjU4NT9leHBpcmVzX2luBjsAVEkiDHB1cnBvc2UGOwBUSSIPYXR0YWNoYWJsZQY7AFRJIg9leHBpcmVzX2F0BjsAVDA=--3ea94544114c6859de0e97bc78ccd56800ffa922",
+    "name": "ilia makarov",
+    "email_address": "ilia.makarov@me.com",
+    "personable_type": "User",
+    "title": "Frontend Developer",
+    "bio": "",
+    "location": "Ukraine",
+    "created_at": "2023-09-01T08:05:05.065Z",
+    "updated_at": "2023-09-01T09:03:44.293Z",
+    "admin": true,
+    "owner": true,
+    "client": false,
+    "employee": true,
+    "time_zone": "Europe/Kiev",
+    "avatar_url": "https://bc3-production-assets-cdn.basecamp-static.com/5674836/people/BAhpBNkdpwI=--d7ad7ced798a3602f2c64293d11d931870b73592/avatar?v=1",
+    "company": {
+      "id": 3460388,
+      "name": "Deskpro"
+    },
+    "can_ping": true,
+    "can_manage_projects": true,
+    "can_manage_people": true
+  },
+  {
+    "id": 44506648,
+    "attachable_sgid": "BAh7CEkiCGdpZAY6BkVUSSIpZ2lkOi8vYmMzL1BlcnNvbi80NDUwNjY0OD9leHBpcmVzX2luBjsAVEkiDHB1cnBvc2UGOwBUSSIPYXR0YWNoYWJsZQY7AFRJIg9leHBpcmVzX2F0BjsAVDA=--55531c278cc943d471e4ca00a8c5d522cc80073b",
+    "name": "David A.",
+    "email_address": "davidtestacc0401@gmail.com",
+    "personable_type": "User",
+    "title": "PM",
+    "bio": null,
+    "location": null,
+    "created_at": "2023-09-01T08:19:08.095Z",
+    "updated_at": "2023-09-01T08:19:08.095Z",
+    "admin": false,
+    "owner": false,
+    "client": false,
+    "employee": true,
+    "time_zone": "Europe/Kiev",
+    "avatar_url": "https://bc3-production-assets-cdn.basecamp-static.com/5674836/people/BAhpBBgepwI=--008c6d5bc0c0a0f41969698d0601f09c4c0cd9c0/avatar?v=1",
+    "company": {
+      "id": 3460388,
+      "name": "Deskpro"
+    },
+    "can_ping": true,
+    "can_manage_projects": true,
+    "can_manage_people": false
+  }
+]

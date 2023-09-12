@@ -1,5 +1,5 @@
 import { HorizontalDivider } from "@deskpro/app-sdk";
-import { Search, Container } from "../common";
+import { Search, Container, Navigation } from "../common";
 import { Filters, Buttons, Cards } from "./blocks";
 import type { FC, Dispatch } from "react";
 import type { Maybe, CardTableTree } from "../../types";
@@ -22,6 +22,7 @@ type Props = {
   onChangeSelectedCard: (card: Card) => void,
   account: Maybe<Account>,
   projects: Project[],
+  onNavigateToCreate: () => void,
 };
 
 const LinkCards: FC<Props> = ({
@@ -40,11 +41,13 @@ const LinkCards: FC<Props> = ({
   onChangeAccount,
   selectedCardTable,
   onChangeCardTable,
+  onNavigateToCreate,
   onChangeSelectedCard,
 }) => {
   return (
     <>
       <Container>
+        <Navigation selected="link" onNavigateToCreate={onNavigateToCreate} />
         <Search onChange={onChangeSearch}/>
         <Filters
           accounts={accounts}

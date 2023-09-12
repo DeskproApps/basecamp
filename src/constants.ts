@@ -6,6 +6,8 @@ export const DATE_FORMAT = "dd MMM, yyyy";
 
 export const TIME_FORMAT = "H:mm";
 
+export const API_DATE_FORMAT = "yyyy-MM-dd";
+
 /** Deskpro */
 export const APP_PREFIX = "basecamp";
 

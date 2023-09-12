@@ -17,8 +17,10 @@ const QueryKey = {
   PROJECT: "project",
   PROJECTS: "projects",
   ACCOUNTS: "accounts",
+  CARD_TABLES: "cardTables",
   LINKED_CARDS: "linkedCard",
   CARD_COMMENTS: "cardComments",
+  PEOPLE_BY_PROJECT: "peopleByProject",
 }
 
 export { queryClient, QueryKey };
