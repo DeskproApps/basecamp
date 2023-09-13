@@ -7,3 +7,5 @@ export { ViewCard } from "./ViewCard";
 export { CreateCard } from "./CreateCard";
 export { CardForm } from "./CardForm";
 export { EditCard } from "./EditCard";
+export { CreateCardComment } from "./CreateCardComment";
+export { CardCommentForm } from "./CardCommentForm";

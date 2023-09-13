@@ -9,9 +9,10 @@ type Props = {
   account: Account,
   project: Project,
   comments: CardComment[],
+  onNavigateToAddComment: () => void,
 };
 
-const ViewCard: FC<Props> = ({ card, account, project, comments }) => {
+const ViewCard: FC<Props> = ({ card, account, project, comments, onNavigateToAddComment }) => {
   return (
     <>
       <Container>
@@ -27,7 +28,7 @@ const ViewCard: FC<Props> = ({ card, account, project, comments }) => {
       <HorizontalDivider />
 
       <Container>
-        <Comments comments={comments} />
+        <Comments comments={comments} onNavigateToAddComment={onNavigateToAddComment} />
       </Container>
     </>
   );

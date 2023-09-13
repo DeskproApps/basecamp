@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { useSearchParams, createSearchParams } from "react-router-dom";
+import { useMemo, useCallback } from "react";
+import { useSearchParams, createSearchParams, useNavigate } from "react-router-dom";
 import { LoadingSpinner, useDeskproElements } from "@deskpro/app-sdk";
 import { useSetTitle } from "../../hooks";
 import { useCard } from "./hooks";
@@ -9,6 +9,7 @@ import type { CardMeta } from "../../types";
 
 const ViewCardPage: FC = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const accountId = searchParams.get("accountId");
   const projectId = searchParams.get("projectId");
   const cardId = searchParams.get("cardId");
@@ -20,6 +21,15 @@ const ViewCardPage: FC = () => {
     };
   }, [accountId, projectId, cardId]);
   const { card, account, project, isLoading, comments } = useCard(cardMeta);
+
+  const onNavigateToAddComment = useCallback(() => {
+    navigate({
+      pathname: "/cards/comments/create",
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      search: `?${createSearchParams(cardMeta)}`,
+    });
+  }, [navigate, cardMeta]);
 
   useSetTitle("Basecamp");
 
@@ -60,6 +70,7 @@ const ViewCardPage: FC = () => {
       account={account}
       project={project}
       comments={comments}
+      onNavigateToAddComment={onNavigateToAddComment}
     />
   );
 };

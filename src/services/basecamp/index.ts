@@ -12,3 +12,4 @@ export { createCardService } from "./createCardService";
 export { getColumnService } from "./getColumnService";
 export { updateCardService } from "./updateCardService";
 export { changeCardColumnService } from "./changeCardColumnService";
+export { createCardCommentService } from "./createCardCommentService";
