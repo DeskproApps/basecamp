@@ -19,6 +19,7 @@ const QueryKey = {
   ACCOUNTS: "accounts",
   CARD_TABLES: "cardTables",
   LINKED_CARDS: "linkedCard",
+  TABLE_COLUMN: "tableColumn",
   CARD_COMMENTS: "cardComments",
   PEOPLE_BY_PROJECT: "peopleByProject",
 }

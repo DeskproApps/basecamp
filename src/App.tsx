@@ -14,6 +14,7 @@ import {
   HomePage,
   LoginPage,
   ViewCardPage,
+  EditCardPage,
   LinkCardsPage,
   LoadingAppPage,
   CreateCardPage,
@@ -75,6 +76,7 @@ const App: FC = () => {
         <Route path="/cards/link" element={<LinkCardsPage/>}/>)
         <Route path="/cards/view" element={<ViewCardPage/>}/>)
         <Route path="/cards/create" element={<CreateCardPage/>}/>)
+        <Route path="/cards/edit" element={<EditCardPage/>}/>)
         <Route index element={<LoadingAppPage/>} />
       </Routes>
       {!isAdmin && (<><br/><br/><br/></>)}

@@ -6,3 +6,4 @@ export { Home } from "./Home";
 export { ViewCard } from "./ViewCard";
 export { CreateCard } from "./CreateCard";
 export { CardForm } from "./CardForm";
+export { EditCard } from "./EditCard";

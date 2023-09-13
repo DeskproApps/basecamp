@@ -6,3 +6,4 @@ export { default as mockCardTable } from "./mockCardTable.json";
 export { default as mockProjects } from "./mockProjects.json";
 export { default as mockCardComments } from "./mockCardComments.json";
 export { default as mockProjectPeople } from "./mockProjectPeople.json";
+export { default as mockColumn } from "./mockColumn.json";

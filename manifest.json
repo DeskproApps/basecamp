@@ -42,7 +42,7 @@
     "whitelist": [
       {
         "url": "https://3.basecampapi.com/.*",
-        "methods": ["GET", "POST"],
+        "methods": ["GET", "POST", "PUT"],
         "timeout": 20
       },
       {

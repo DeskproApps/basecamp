@@ -12,7 +12,7 @@ describe("CardForm", () => {
     test("should return full card values", () => {
       expect(getCardValues(mockValues as never)).toEqual({
         title: "Test Card",
-        content: "this is description",
+        content: "<p>this is description</p>",
         due_on: "2023-09-29",
         assignee_ids: [44506585, 44506648],
       });

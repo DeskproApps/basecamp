@@ -15,7 +15,7 @@
   "comments_url": "https://3.basecampapi.com/101/buckets/201/recordings/6507640630/comments.json",
   "position": 1,
   "parent": {
-    "id": 6507629801,
+    "id": 6507629798,
     "title": "In progress",
     "type": "Kanban::Column",
     "url": "https://3.basecampapi.com/101/buckets/201/card_tables/columns/6507629801.json",

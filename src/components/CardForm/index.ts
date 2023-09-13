@@ -1,3 +1,3 @@
 export { CardForm } from "./CardForm";
-export { getCardValues, getCardMeta } from "./utils";
+export { getCardValues, getCardMeta, getColumnToChange } from "./utils";
 export type { Props, FormValidationSchema } from "./types";

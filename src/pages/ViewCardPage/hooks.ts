@@ -20,9 +20,9 @@ export type Result = {
   comments: CardComment[],
 };
 
-type UseSearch = (params?: Partial<CardMeta>) => Result;
+type UseCard = (params?: Partial<CardMeta>) => Result;
 
-const useCard: UseSearch = (params) => {
+const useCard: UseCard = (params) => {
   const accountId = get(params, "accountId");
   const projectId = get(params, "projectId");
   const cardId = get(params, "cardId");
