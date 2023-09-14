@@ -9,7 +9,7 @@ import {
 } from "@deskpro/app-sdk";
 import { setEntityService } from "../../services/deskpro";
 import { createCardService } from "../../services/basecamp";
-import { useAsyncError, useSetTitle } from "../../hooks";
+import { useAsyncError, useSetTitle, useLinkedAutoComment } from "../../hooks";
 import { entity } from "../../utils";
 import { getCardValues, getCardMeta } from "../../components/CardForm";
 import { CreateCard } from "../../components";
@@ -23,6 +23,7 @@ const CreateCardPage: FC = () => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { asyncErrorHandler } = useAsyncError();
+  const { addLinkComment } = useLinkedAutoComment();
   const [error, setError] = useState<Maybe<string|string[]>>(null);
   const ticketId = useMemo(() => get(context, ["data", "ticket", "id"]), [context]);
 
@@ -43,11 +44,14 @@ const CreateCardPage: FC = () => {
     }
 
     return createCardService(client, accountId, projectId, columnId, data)
-      .then((card) => setEntityService(
-        client,
-        ticketId,
-        entity.generateId({ id: accountId } as Account, card) as string,
-      ))
+      .then((card) => Promise.all([
+        setEntityService(
+            client,
+            ticketId,
+            entity.generateId({ id: accountId } as Account, card) as string,
+        ),
+        addLinkComment({ accountId, projectId, cardId: card.id }),
+      ]))
       .then(() => navigate("/home"))
       .catch((err) => {
         const error = get(err, ["data", "error", "error"]);
@@ -58,7 +62,7 @@ const CreateCardPage: FC = () => {
           asyncErrorHandler(err);
         }
       })
-  }, [client, ticketId, navigate, asyncErrorHandler]);
+  }, [client, ticketId, navigate, asyncErrorHandler, addLinkComment]);
 
   useSetTitle("Link Cards");
 

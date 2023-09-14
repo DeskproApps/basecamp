@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback } from "react";
 import get from "lodash/get";
 import find from "lodash/find";
 import size from "lodash/size";
+import isEmpty from "lodash/isEmpty";
 import cloneDeep from "lodash/cloneDeep";
 import { useNavigate } from "react-router-dom";
 import {
@@ -10,7 +11,7 @@ import {
   useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
 import { setEntityService } from "../../services/deskpro";
-import { useSetTitle, useAsyncError } from "../../hooks";
+import { useSetTitle, useAsyncError, useLinkedAutoComment } from "../../hooks";
 import { useSearchCards } from "./hooks";
 import { entity, filterCards } from "../../utils";
 import { LinkCards } from "../../components";
@@ -23,6 +24,7 @@ const LinkCardsPage: FC = () => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { asyncErrorHandler } = useAsyncError();
+  const { addLinkComment } = useLinkedAutoComment();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCards, setSelectedCards] = useState<Card[]>([]);
   const [selectedAccount, setSelectedAccount] = useState<Maybe<Account["id"]>>(null);
@@ -61,7 +63,7 @@ const LinkCardsPage: FC = () => {
   const onNavigateToCreate = useCallback(() => navigate("/cards/create"), [navigate]);
 
   const onLinkCards = useCallback(() => {
-    if (!client || !ticketId || !size(selectedCards)) {
+    if (!client || !ticketId || !size(selectedCards) || isEmpty(account)) {
       return;
     }
 
@@ -71,12 +73,17 @@ const LinkCardsPage: FC = () => {
       ...selectedCards.map((card) => {
         const cardMeta = entity.generateId(account, card);
         return !cardMeta ? Promise.resolve() : setEntityService(client, ticketId, cardMeta);
-      })
+      }),
+      ...selectedCards.map((card) => addLinkComment({
+        accountId: get(account, ["id"]),
+        projectId: get(card, ["bucket", "id"]),
+        cardId: get(card, ["id"]),
+      })),
     ])
       .then(() => navigate("/home"))
       .catch(asyncErrorHandler)
       .finally(() => setIsSubmitting(false));
-  }, [client, ticketId, selectedCards, account, asyncErrorHandler, navigate]);
+  }, [client, ticketId, selectedCards, account, asyncErrorHandler, navigate, addLinkComment]);
 
   useSetTitle("Link Cards");
 
