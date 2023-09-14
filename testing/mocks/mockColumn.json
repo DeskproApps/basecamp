@@ -1,0 +1,84 @@
+{
+  "id": 6507637888,
+  "status": "active",
+  "visible_to_clients": false,
+  "created_at": "2023-09-01T08:14:00.351Z",
+  "updated_at": "2023-09-08T14:52:51.881Z",
+  "title": "Review",
+  "inherits_status": true,
+  "type": "Kanban::Column",
+  "url": "https://3.basecampapi.com/5674836/buckets/34169571/card_tables/columns/6507637888.json",
+  "app_url": "https://3.basecamp.com/5674836/buckets/34169571/card_tables/columns/6507637888",
+  "bookmark_url": "https://3.basecampapi.com/5674836/my/bookmarks/BAh7CEkiCGdpZAY6BkVUSSIuZ2lkOi8vYmMzL1JlY29yZGluZy82NTA3NjM3ODg4P2V4cGlyZXNfaW4GOwBUSSIMcHVycG9zZQY7AFRJIg1yZWFkYWJsZQY7AFRJIg9leHBpcmVzX2F0BjsAVDA=--7122bd9bdf232efd2330ebc84e25dab72e05274a.json",
+  "subscription_url": "https://3.basecampapi.com/5674836/buckets/34169571/recordings/6507637888/subscription.json",
+  "position": 3,
+  "parent": {
+    "id": 6507629791,
+    "title": "Card Table",
+    "type": "Kanban::Board",
+    "url": "https://3.basecampapi.com/5674836/buckets/34169571/card_tables/6507629791.json",
+    "app_url": "https://3.basecamp.com/5674836/buckets/34169571/card_tables/6507629791"
+  },
+  "bucket": {
+    "id": 201,
+    "name": "Deskpro Apps Lab",
+    "type": "Project"
+  },
+  "creator": {
+    "id": 44506585,
+    "attachable_sgid": "BAh7CEkiCGdpZAY6BkVUSSIpZ2lkOi8vYmMzL1BlcnNvbi80NDUwNjU4NT9leHBpcmVzX2luBjsAVEkiDHB1cnBvc2UGOwBUSSIPYXR0YWNoYWJsZQY7AFRJIg9leHBpcmVzX2F0BjsAVDA=--3ea94544114c6859de0e97bc78ccd56800ffa922",
+    "name": "ilia makarov",
+    "email_address": "ilia.makarov@me.com",
+    "personable_type": "User",
+    "title": "Frontend Developer",
+    "bio": "",
+    "location": "Ukraine",
+    "created_at": "2023-09-01T08:05:05.065Z",
+    "updated_at": "2023-09-01T09:03:44.293Z",
+    "admin": true,
+    "owner": true,
+    "client": false,
+    "employee": true,
+    "time_zone": "Europe/Kiev",
+    "avatar_url": "https://bc3-production-assets-cdn.basecamp-static.com/5674836/people/BAhpBNkdpwI=--d7ad7ced798a3602f2c64293d11d931870b73592/avatar?v=1",
+    "company": {
+      "id": 3460388,
+      "name": "Deskpro"
+    },
+    "can_ping": true,
+    "can_manage_projects": true,
+    "can_manage_people": true
+  },
+  "description": "",
+  "subscribers": [
+    {
+      "id": 44506585,
+      "attachable_sgid": "BAh7CEkiCGdpZAY6BkVUSSIpZ2lkOi8vYmMzL1BlcnNvbi80NDUwNjU4NT9leHBpcmVzX2luBjsAVEkiDHB1cnBvc2UGOwBUSSIPYXR0YWNoYWJsZQY7AFRJIg9leHBpcmVzX2F0BjsAVDA=--3ea94544114c6859de0e97bc78ccd56800ffa922",
+      "name": "ilia makarov",
+      "email_address": "ilia.makarov@me.com",
+      "personable_type": "User",
+      "title": "Frontend Developer",
+      "bio": "",
+      "location": "Ukraine",
+      "created_at": "2023-09-01T08:05:05.065Z",
+      "updated_at": "2023-09-01T09:03:44.293Z",
+      "admin": true,
+      "owner": true,
+      "client": false,
+      "employee": true,
+      "time_zone": "Europe/Kiev",
+      "avatar_url": "https://bc3-production-assets-cdn.basecamp-static.com/5674836/people/BAhpBNkdpwI=--d7ad7ced798a3602f2c64293d11d931870b73592/avatar?v=1",
+      "company": {
+        "id": 3460388,
+        "name": "Deskpro"
+      },
+      "can_ping": true,
+      "can_manage_projects": true,
+      "can_manage_people": true
+    }
+  ],
+  "color": null,
+  "cards_count": 3,
+  "comment_count": 0,
+  "cards_url": "https://3.basecampapi.com/5674836/buckets/34169571/card_tables/lists/6507637888/cards.json"
+}

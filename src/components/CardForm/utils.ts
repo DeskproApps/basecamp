@@ -7,10 +7,11 @@ import { z } from "zod";
 import { getOption } from "../../utils";
 import { format } from "../../utils/date";
 import { API_DATE_FORMAT } from "../../constants";
+import { toMarkdown, toHTML } from "../common/Markdown";
 import { Member } from "../common";
 import type { Option } from "../../types";
-import type {Project, CardTable, Person, Account, Column} from "../../services/basecamp/types";
-import type { FormValidationSchema, CardValues } from "./types";
+import type { Project, CardTable, Person, Account, Column, Card } from "../../services/basecamp/types";
+import type { FormValidationSchema, CardValues, Props } from "./types";
 
 const validationSchema = z.object({
   account: z.number().positive(),
@@ -23,16 +24,18 @@ const validationSchema = z.object({
   content: z.string().optional(),
 });
 
-const getInitValues = (): FormValidationSchema => {
+const getInitValues = (card?: Card, cardMeta?: Props["cardMeta"]): FormValidationSchema => {
+  const dueDate = get(card, ["due_on"], null);
+
   return {
-    account: 0,
-    project: 0,
-    cardTable: 0,
-    column: 0,
-    title: "",
-    assignees: [],
-    dueDate: undefined,
-    content: "",
+    account: get(cardMeta, ["accountId"], 0),
+    project: get(card, ["bucket", "id"], 0),
+    cardTable: get(cardMeta, ["cardTableId"], 0),
+    column: get(card, ["parent", "id"], 0),
+    title: get(card, ["title"], ""),
+    assignees: (get(card, ["assignees"], []) || []).map(({ id }) => id),
+    dueDate: !dueDate ? undefined : new Date(dueDate),
+    content: toMarkdown(get(card, ["content"], "")),
   };
 };
 
@@ -43,7 +46,7 @@ const getCardValues = (values: FormValidationSchema): CardValues => {
 
   return {
     title: get(values, ["title"]),
-    ...(!content ? {} : { content }),
+    ...(!content ? {} : { content: toHTML(content) }),
     ...(!dueDate ? {} :  { due_on: format(dueDate, API_DATE_FORMAT) }),
     ...(isEmpty(assigneeIds) ? {} : { assignee_ids: assigneeIds }),
   };
@@ -102,6 +105,15 @@ const getPeopleOptions = (persons?: Person[]) => {
   });
 };
 
+const getColumnToChange = (card?: Card, values?: FormValidationSchema): void|Column["id"] => {
+  const oldColumnId = get(card, ["parent", "id"]);
+  const newColumnId = get(values, ["column"]);
+
+  return (Boolean(oldColumnId) && Boolean(newColumnId) && oldColumnId !== newColumnId)
+    ? newColumnId
+    : undefined;
+};
+
 export {
   getOptions,
   getCardMeta,
@@ -109,5 +121,6 @@ export {
   getCardValues,
   validationSchema,
   getPeopleOptions,
+  getColumnToChange,
   getCardTableOptions,
 };

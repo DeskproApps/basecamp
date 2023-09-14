@@ -4,16 +4,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input, Stack } from "@deskpro/deskpro-ui";
 import { LoadingSpinner } from "@deskpro/app-sdk";
 import { useFormDeps } from "./hooks";
-import { Label, Button, Select, TextArea, ErrorBlock, DateInput } from "../common";
+import { Label, Button, Select, TextArea, ErrorBlock, DateInput, FieldHint } from "../common";
 import { getInitValues, validationSchema } from "./utils";
 import type { FC } from "react";
 import type { FormValidationSchema, Props } from "./types";
 import type { Account, Project, CardTable, Column, Person } from "../../services/basecamp/types";
 
 const CardForm: FC<Props> = ({
+  card,
   error,
   onSubmit,
   onCancel,
+  cardMeta,
   isEditMode,
 }) => {
   const {
@@ -23,7 +25,7 @@ const CardForm: FC<Props> = ({
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormValidationSchema>({
-    defaultValues: getInitValues(),
+    defaultValues: getInitValues(card, cardMeta),
     resolver: zodResolver(validationSchema),
   });
   const {
@@ -88,6 +90,7 @@ const CardForm: FC<Props> = ({
         <Select<CardTable["id"]>
           id="cardTable"
           value={watch("cardTable")}
+          disabled={isEditMode}
           options={cardTableOptions}
           noFoundText="No card table(s) found"
           onChange={({ value }) => {
@@ -169,6 +172,7 @@ const CardForm: FC<Props> = ({
           error={has(errors, ["content", "message"])}
           {...register("content")}
         />
+        <FieldHint>Markdown formatting is supported</FieldHint>
       </Label>
 
       <Stack justify="space-between">

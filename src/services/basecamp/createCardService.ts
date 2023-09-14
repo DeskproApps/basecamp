@@ -1,6 +1,6 @@
 import { baseRequest } from "./baseRequest";
 import type { IDeskproClient } from "@deskpro/app-sdk";
-import type { Card, Account, Project, Column} from "./types";
+import type { Card, Account, Project, Column } from "./types";
 
 const createCardService = (
   client: IDeskproClient,

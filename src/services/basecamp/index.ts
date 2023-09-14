@@ -9,3 +9,6 @@ export { getCardService } from "./getCardService";
 export { getCardCommentsService } from "./getCardCommentsService";
 export { getProjectPeopleService } from "./getProjectPeopleService";
 export { createCardService } from "./createCardService";
+export { getColumnService } from "./getColumnService";
+export { updateCardService } from "./updateCardService";
+export { changeCardColumnService } from "./changeCardColumnService";
