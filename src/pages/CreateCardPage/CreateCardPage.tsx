@@ -9,12 +9,12 @@ import {
 } from "@deskpro/app-sdk";
 import { setEntityService } from "../../services/deskpro";
 import { createCardService } from "../../services/basecamp";
-import { useAsyncError, useSetTitle, useLinkedAutoComment } from "../../hooks";
+import { useAsyncError, useSetTitle, useLinkedAutoComment, useReplyBox } from "../../hooks";
 import { entity } from "../../utils";
 import { getCardValues, getCardMeta } from "../../components/CardForm";
 import { CreateCard } from "../../components";
 import type { FC } from "react";
-import type { Maybe, TicketContext } from "../../types";
+import type { Maybe, TicketContext, CardMetaAsString } from "../../types";
 import type { Account } from "../../services/basecamp/types";
 import type { FormValidationSchema } from "../../components/CardForm";
 
@@ -24,6 +24,7 @@ const CreateCardPage: FC = () => {
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { asyncErrorHandler } = useAsyncError();
   const { addLinkComment } = useLinkedAutoComment();
+  const { setSelectionState } = useReplyBox();
   const [error, setError] = useState<Maybe<string|string[]>>(null);
   const ticketId = useMemo(() => get(context, ["data", "ticket", "id"]), [context]);
 
@@ -44,14 +45,15 @@ const CreateCardPage: FC = () => {
     }
 
     return createCardService(client, accountId, projectId, columnId, data)
-      .then((card) => Promise.all([
-        setEntityService(
-            client,
-            ticketId,
-            entity.generateId({ id: accountId } as Account, card) as string,
-        ),
-        addLinkComment({ accountId, projectId, cardId: card.id }),
-      ]))
+      .then((card) => {
+        const entityId = entity.generateId({ id: accountId } as Account, card) as CardMetaAsString;
+        return Promise.all([
+          setEntityService(client, ticketId, entityId),
+          addLinkComment({ accountId, projectId, cardId: card.id }),
+          setSelectionState(entityId, true, "email"),
+          setSelectionState(entityId, true, "note"),
+        ])
+      })
       .then(() => navigate("/home"))
       .catch((err) => {
         const error = get(err, ["data", "error", "error"]);
@@ -62,7 +64,7 @@ const CreateCardPage: FC = () => {
           asyncErrorHandler(err);
         }
       })
-  }, [client, ticketId, navigate, asyncErrorHandler, addLinkComment]);
+  }, [client, ticketId, navigate, asyncErrorHandler, addLinkComment, setSelectionState]);
 
   useSetTitle("Link Cards");
 

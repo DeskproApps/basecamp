@@ -11,7 +11,7 @@ import {
   useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
 import { setEntityService } from "../../services/deskpro";
-import { useSetTitle, useAsyncError, useLinkedAutoComment } from "../../hooks";
+import { useSetTitle, useAsyncError, useLinkedAutoComment, useReplyBox } from "../../hooks";
 import { useSearchCards } from "./hooks";
 import { entity, filterCards } from "../../utils";
 import { LinkCards } from "../../components";
@@ -25,6 +25,7 @@ const LinkCardsPage: FC = () => {
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { asyncErrorHandler } = useAsyncError();
   const { addLinkComment } = useLinkedAutoComment();
+  const { setSelectionState } = useReplyBox();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCards, setSelectedCards] = useState<Card[]>([]);
   const [selectedAccount, setSelectedAccount] = useState<Maybe<Account["id"]>>(null);
@@ -79,11 +80,19 @@ const LinkCardsPage: FC = () => {
         projectId: get(card, ["bucket", "id"]),
         cardId: get(card, ["id"]),
       })),
+      ...selectedCards.map((card) => {
+        const entityId = entity.generateId(account, card);
+        return !entityId ? Promise.resolve() : setSelectionState(entityId, true, "email");
+      }),
+      ...selectedCards.map((card) => {
+        const entityId = entity.generateId(account, card);
+        return !entityId ? Promise.resolve() : setSelectionState(entityId, true, "note");
+      }),
     ])
       .then(() => navigate("/home"))
       .catch(asyncErrorHandler)
       .finally(() => setIsSubmitting(false));
-  }, [client, ticketId, selectedCards, account, asyncErrorHandler, navigate, addLinkComment]);
+  }, [client, ticketId, selectedCards, account, asyncErrorHandler, navigate, addLinkComment, setSelectionState]);
 
   useSetTitle("Link Cards");
 

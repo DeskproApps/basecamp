@@ -7,13 +7,13 @@ import { getCardService } from "../services/basecamp";
 import { useQueriesWithClient } from "./useQueriesWithClient";
 import { entity } from "../utils";
 import { QueryKey } from "../query";
-import type { TicketContext, CardMeta } from "../types";
+import type { TicketContext, CardMetaAsString } from "../types";
 import type { Card } from "../services/basecamp/types";
 
 export type Result = {
   isLoading: boolean;
   cards: Card[];
-  cardsMeta: CardMeta[];
+  cardsMeta: CardMetaAsString[];
 };
 
 const useLinkedCards = (): Result => {
@@ -46,7 +46,7 @@ const useLinkedCards = (): Result => {
   return {
     isLoading: [linkedIds, ...fetchedCards].some(({ isLoading }) => isLoading),
     cards: cards as Card[],
-    cardsMeta: (get(linkedIds, ["data"], []) || []).map(entity.parseId) as CardMeta[],
+    cardsMeta: (get(linkedIds, ["data"], []) || []) as CardMetaAsString[],
   };
 };
 

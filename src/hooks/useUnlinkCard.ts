@@ -9,6 +9,7 @@ import {
 import { deleteEntityService } from "../services/deskpro";
 import { useAsyncError } from "./useAsyncError";
 import { useLinkedAutoComment } from "./useLinkedAutoComment";
+import { useReplyBox } from "./useReplyBox";
 import { entity } from "../utils";
 import type { CardMeta, TicketContext } from "../types";
 import type { Card, Account } from "../services/basecamp/types";
@@ -25,6 +26,7 @@ const useUnlinkCard = (): Result => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { addUnlinkComment } = useLinkedAutoComment();
+  const { deleteSelectionState } = useReplyBox();
   const { asyncErrorHandler } = useAsyncError();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const ticketId = useMemo(() => get(context, ["data", "ticket", "id"]), [context]);
@@ -42,13 +44,15 @@ const useUnlinkCard = (): Result => {
     Promise.all([
       deleteEntityService(client, ticketId, entityId),
       addUnlinkComment(meta),
+      deleteSelectionState(entityId, "note"),
+      deleteSelectionState(entityId, "email"),
     ])
       .then(() => {
         setIsLoading(false);
         navigate("/home");
       })
       .catch(asyncErrorHandler);
-  }, [client, ticketId, navigate, asyncErrorHandler, addUnlinkComment]);
+  }, [client, ticketId, navigate, asyncErrorHandler, addUnlinkComment, deleteSelectionState]);
 
   return { isLoading, unlink };
 };
