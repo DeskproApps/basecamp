@@ -6,3 +6,4 @@ export { HomePage } from "./HomePage";
 export { ViewCardPage } from "./ViewCardPage";
 export { CreateCardPage } from "./CreateCardPage";
 export { EditCardPage } from "./EditCardPage";
+export { CreateCardCommentPage } from "./CreateCardCommentPage";

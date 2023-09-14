@@ -19,6 +19,7 @@ import {
   LoadingAppPage,
   CreateCardPage,
   AdminCallbackPage,
+  CreateCardCommentPage,
 } from "./pages";
 import type { FC } from "react";
 import type { EventPayload } from "./types";
@@ -77,6 +78,7 @@ const App: FC = () => {
         <Route path="/cards/view" element={<ViewCardPage/>}/>)
         <Route path="/cards/create" element={<CreateCardPage/>}/>)
         <Route path="/cards/edit" element={<EditCardPage/>}/>)
+        <Route path="/cards/comments/create" element={<CreateCardCommentPage/>} />
         <Route index element={<LoadingAppPage/>} />
       </Routes>
       {!isAdmin && (<><br/><br/><br/></>)}

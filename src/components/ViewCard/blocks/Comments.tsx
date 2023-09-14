@@ -8,12 +8,16 @@ import type { CardComment } from "../../../services/basecamp/types";
 
 type Props = {
   comments: CardComment[],
+  onNavigateToAddComment: () => void,
 };
 
-const Comments: FC<Props> = ({ comments }) => {
+const Comments: FC<Props> = ({ comments, onNavigateToAddComment }) => {
   return (
     <>
-      <Title title={`Comments (${size(comments)})`} />
+      <Title
+        title={`Comments (${size(comments)})`}
+        onClick={onNavigateToAddComment}
+      />
 
       {comments.map(({ id, creator, created_at, content }) => (
         <Fragment key={id}>

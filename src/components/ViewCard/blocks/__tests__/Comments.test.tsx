@@ -13,8 +13,8 @@ describe("ViewCard", () => {
 
     test("render", async () => {
       const { findByText } = render((
-        <Comments comments={mockCardComments as never[]}/>
-      ), { wrappers: { theme: true }});
+        <Comments comments={mockCardComments as never[]} onNavigateToAddComment={jest.fn()} />
+      ), { wrappers: { theme: true } });
 
       expect(await findByText(/Comments \(2\)/i)).toBeInTheDocument();
       expect(await findByText(/First comment/i)).toBeInTheDocument();
