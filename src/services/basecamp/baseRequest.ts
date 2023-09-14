@@ -22,6 +22,7 @@ const baseRequest: Request = async (client, {
   const options: RequestInit = {
     method,
     headers: {
+      "Content-Type": "application/json",
       "Authorization": `Bearer ${placeholders.ACCESS_TOKEN}`,
       ...customHeaders,
     },
@@ -32,7 +33,6 @@ const baseRequest: Request = async (client, {
   } else if (!isEmpty(data)) {
     options.body = JSON.stringify(data);
     options.headers = {
-      "Content-Type": "application/json",
       ...options.headers,
     };
   }
