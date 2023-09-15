@@ -26,7 +26,7 @@ describe("ViewCard", () => {
       expect(await findAllByText(/Deskpro/i)).toHaveLength(4);
       expect(await findByText(/In progress/i)).toBeInTheDocument();
       expect(await findByText(/David A./i)).toBeInTheDocument();
-      expect(await findByText(/ilia makarov/i)).toBeInTheDocument();
+      expect(await findByText(/Taras Shevchenko/i)).toBeInTheDocument();
       expect(await findByText(/01 Sep, 2023/i)).toBeInTheDocument();
       expect(await findByText(/09 Oct, 2023/i)).toBeInTheDocument();
       expect(await findByText(/100500/i)).toBeInTheDocument();

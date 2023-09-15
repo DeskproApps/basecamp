@@ -10,7 +10,7 @@ import {
 import { setEntityService } from "../../services/deskpro";
 import { createCardService } from "../../services/basecamp";
 import { useAsyncError, useSetTitle, useLinkedAutoComment, useReplyBox } from "../../hooks";
-import { entity } from "../../utils";
+import { entity, getEntityMetadata } from "../../utils";
 import { getCardValues, getCardMeta } from "../../components/CardForm";
 import { CreateCard } from "../../components";
 import type { FC } from "react";
@@ -48,7 +48,7 @@ const CreateCardPage: FC = () => {
       .then((card) => {
         const entityId = entity.generateId({ id: accountId } as Account, card) as CardMetaAsString;
         return Promise.all([
-          setEntityService(client, ticketId, entityId),
+          setEntityService(client, ticketId, entityId, getEntityMetadata(card)),
           addLinkComment({ accountId, projectId, cardId: card.id }),
           setSelectionState(entityId, true, "email"),
           setSelectionState(entityId, true, "note"),

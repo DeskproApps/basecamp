@@ -13,7 +13,7 @@ import {
 import { setEntityService } from "../../services/deskpro";
 import { useSetTitle, useAsyncError, useLinkedAutoComment, useReplyBox } from "../../hooks";
 import { useSearchCards } from "./hooks";
-import { entity, filterCards } from "../../utils";
+import { entity, filterCards, getEntityMetadata } from "../../utils";
 import { LinkCards } from "../../components";
 import type { FC } from "react";
 import type { Maybe, TicketContext } from "../../types";
@@ -73,7 +73,9 @@ const LinkCardsPage: FC = () => {
     return Promise.all([
       ...selectedCards.map((card) => {
         const cardMeta = entity.generateId(account, card);
-        return !cardMeta ? Promise.resolve() : setEntityService(client, ticketId, cardMeta);
+        return !cardMeta
+          ? Promise.resolve()
+          : setEntityService(client, ticketId, cardMeta, getEntityMetadata(card, account));
       }),
       ...selectedCards.map((card) => addLinkComment({
         accountId: get(account, ["id"]),

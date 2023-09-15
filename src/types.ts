@@ -1,7 +1,15 @@
 import type { To, ParamKeyValuePair } from "react-router-dom";
 import type { DropdownValueType } from "@deskpro/deskpro-ui";
 import type { Context, IDeskproClient } from "@deskpro/app-sdk";
-import type { Response, Project, Dock, Account, Card } from "./services/basecamp/types";
+import type {
+  Dock,
+  Card,
+  Person,
+  Column,
+  Account,
+  Project,
+  Response,
+} from "./services/basecamp/types";
 
 /** Common types */
 export type Maybe<T> = T | undefined | null;
@@ -82,3 +90,13 @@ export type ProjectTree = {
 };
 
 export type CardTableTree = ProjectTree[];
+
+export type EntityMetadata = {
+  id: Card["id"],
+  title: Card["title"],
+  account?: { id: Account["id"], title: Account["name"] },
+  project: { id: Project["id"], title: Project["name"] },
+  column: Column["title"],
+  assignees?: Array<{ id: Person["id"], fullName: Person["name"]|Person["email_address"] }>,
+  dueDate?: DateOn,
+};
