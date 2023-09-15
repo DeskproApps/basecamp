@@ -26,7 +26,7 @@ const ViewCardPage: FC = () => {
     navigate({
       pathname: "/cards/comments/create",
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-ignore - react-router wants there to be a `string`, but here a `number`
       search: `?${createSearchParams(cardMeta)}`,
     });
   }, [navigate, cardMeta]);
@@ -45,7 +45,7 @@ const ViewCardPage: FC = () => {
       payload: { type: "changePage", path: {
         pathname: `/cards/edit`,
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-ignore - react-router wants there to be a `string`, but here a `number`
         search: `?${createSearchParams(cardMeta)}`,
       }}
     });
