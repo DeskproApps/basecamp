@@ -51,7 +51,12 @@ const Search: FC<Props> = ({
           : faSearch as AnyIcon
         }
         rightIcon={(
-          <IconButton icon={faTimes as never} minimal onClick={onClearSearch} />
+          <IconButton
+            minimal
+            data-testid="search-reset"
+            icon={faTimes as never}
+            onClick={onClearSearch}
+          />
         )}
       />
     </Label>
