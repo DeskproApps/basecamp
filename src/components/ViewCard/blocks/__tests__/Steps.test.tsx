@@ -11,7 +11,7 @@ describe("ViewCard", () => {
 
     test("render", async () => {
       const { findByText } = render((
-        <Steps card={mockCard as never}/>
+        <Steps card={mockCard as never} onChangeStepComplete={jest.fn()}/>
       ), { wrappers: { theme: true } });
 
       expect(await findByText(/Steps/i)).toBeInTheDocument();
