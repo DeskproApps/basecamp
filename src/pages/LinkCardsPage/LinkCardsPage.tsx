@@ -59,6 +59,12 @@ const LinkCardsPage: FC = () => {
     setSelectedCards(newSelectedCards);
   }, [selectedCards]);
 
+  const onChangeAccount = useCallback((accountId: Account["id"]) => {
+    setSelectedAccount(accountId);
+    setSelectedCardTable(null);
+    setSelectedCards([]);
+  }, []);
+
   const onCancel = useCallback(() => navigate("/home"), [navigate]);
 
   const onNavigateToCreate = useCallback(() => navigate("/cards/create"), [navigate]);
@@ -120,7 +126,7 @@ const LinkCardsPage: FC = () => {
       selectedCards={selectedCards}
       onChangeSearch={onChangeSearch}
       selectedAccount={selectedAccount}
-      onChangeAccount={setSelectedAccount}
+      onChangeAccount={onChangeAccount}
       selectedCardTable={selectedCardTable}
       onChangeCardTable={setSelectedCardTable}
       onChangeSelectedCard={onChangeSelectedCard}

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Stack } from "@deskpro/deskpro-ui";
 import { getInitValues, validationSchema } from "./utils";
-import { Button, Label, TextArea, ErrorBlock } from "../common";
+import { Button, Label, TextArea, ErrorBlock, FieldHint } from "../common";
 import type { FC } from "react";
 import type { Props } from "./types";
 import type { FormValidationSchema } from "./types";
@@ -33,6 +33,7 @@ const CardCommentForm: FC<Props> = ({ error, onSubmit, onCancel }) => {
           error={has(errors, ["comment", "message"])}
           {...register("comment")}
         />
+        <FieldHint>Markdown formatting is supported</FieldHint>
       </Label>
 
       <Stack justify="space-between">

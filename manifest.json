@@ -72,7 +72,7 @@
       },
       {
         "url": "https://launchpad.37signals.com/.*",
-        "methods": ["POST"],
+        "methods": ["GET", "POST"],
         "timeout": 20
       }
     ]

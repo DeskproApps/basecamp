@@ -40,7 +40,10 @@ const useCard: UseCard = (params) => {
       accountId as Account["id"],
       projectId as Project["id"],
     ),
-    { enabled: Boolean(accountId) && Boolean(projectId) },
+    {
+      enabled: Boolean(accountId) && Boolean(projectId),
+      useErrorBoundary: true,
+    },
   );
 
   const card = useQueryWithClient(

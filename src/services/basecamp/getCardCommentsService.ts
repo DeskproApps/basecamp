@@ -9,7 +9,7 @@ const getCardCommentsService = (
   cardId: Card["id"],
 ) => {
   return baseRequest<CardComment[]>(client, {
-    url: `/${accountId}/buckets/${projectId}/recordings/${cardId}/comments.json`,
+    url: `/${accountId}/buckets/${projectId}/recordings/${cardId}/comments`,
   });
 };
 

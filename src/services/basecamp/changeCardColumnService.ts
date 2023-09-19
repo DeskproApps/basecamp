@@ -10,7 +10,7 @@ const changeCardColumnService = (
   columnId: Column["id"],
 ) => {
   return baseRequest(client, {
-    url: `/${accountId}/buckets/${projectId}/card_tables/${cardId}/moves`,
+    url: `/${accountId}/buckets/${projectId}/card_tables/cards/${cardId}/moves`,
     method: "POST",
     data: { column_id: columnId },
   });

@@ -33,7 +33,13 @@ const App: FC = () => {
   const isAdmin = useMemo(() => pathname.includes("/admin/"), [pathname]);
   const isLoading = [isLoadingLogout, isLoadingUnlink].some((isLoading) => isLoading);
 
-  useDeskproElements(({ registerElement }) => {
+  useDeskproElements(({ registerElement, deRegisterElement }) => {
+    deRegisterElement("refresh");
+    deRegisterElement("home");
+    deRegisterElement("plus");
+    deRegisterElement("menu");
+    deRegisterElement("edit");
+
     registerElement("refresh", { type: "refresh_button" });
   });
 

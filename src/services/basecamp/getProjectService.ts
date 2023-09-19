@@ -8,7 +8,7 @@ const getProjectService = (
   projectId: Project["id"],
 ) => {
   return baseRequest<Project>(client, {
-    url: `/${accountId}/project/${projectId}`,
+    url: `/${accountId}/projects/${projectId}`,
   });
 };
 

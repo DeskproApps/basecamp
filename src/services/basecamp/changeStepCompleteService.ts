@@ -10,7 +10,7 @@ const changeStepCompleteService = (
   complete: boolean,
 ) => {
   return baseRequest<CardStep>(client, {
-    url: `/${accountId}/buckets/${projectId}/card_tables/steps/${stepId}/completions.json`,
+    url: `/${accountId}/buckets/${projectId}/card_tables/steps/${stepId}/completions`,
     method: "PUT",
     data: { completion: complete ? "on" : "off" },
   });

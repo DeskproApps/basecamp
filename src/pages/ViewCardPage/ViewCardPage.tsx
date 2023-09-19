@@ -8,6 +8,7 @@ import {
 import { changeStepCompleteService } from "../../services/basecamp";
 import { useSetTitle, useAsyncError } from "../../hooks";
 import { useCard } from "./hooks";
+import { queryClient } from "../../query";
 import { ViewCard } from "../../components";
 import type { FC } from "react";
 import type { CardMeta } from "../../types";
@@ -48,6 +49,7 @@ const ViewCardPage: FC = () => {
     }
 
     return changeStepCompleteService(client, Number(accountId), Number(projectId), stepId, complete)
+      .then(() => queryClient.invalidateQueries())
       .catch(asyncErrorHandler);
   }, [client, accountId, projectId, asyncErrorHandler]);
 

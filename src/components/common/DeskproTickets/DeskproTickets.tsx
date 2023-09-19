@@ -12,10 +12,12 @@ const DeskproTickets: FC<Props> = ({ entityId }) => {
   const [ticketCount, setTicketCount] = useState<number>(0);
 
   useInitialisedDeskproAppClient((client) => {
-    getEntityAssociationCountService(client, `${entityId}`)
-      .then(setTicketCount)
-      .catch(noop);
-  });
+    if (entityId) {
+      getEntityAssociationCountService(client, `${entityId}`)
+        .then(setTicketCount)
+        .catch(noop);
+    }
+  }, [entityId]);
 
   return <P5>{ticketCount}</P5>;
 };
