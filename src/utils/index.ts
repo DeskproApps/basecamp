@@ -6,3 +6,4 @@ export { getCardTables } from "./getCardTables";
 export { entity } from "./entity";
 export { filterCards } from "./filterCards";
 export { addBlankTargetToLinks } from "./addBlankTargetToLinks";
+export { getEntityMetadata } from "./getEntityMetadata";

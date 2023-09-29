@@ -6,7 +6,6 @@ import type { AuthInfo } from "./types";
 const getAuthInfoService = (client: IDeskproClient) => {
   return baseRequest<AuthInfo>(client, {
     rawUrl: AUTH_URL,
-    method: "POST",
   });
 };
 

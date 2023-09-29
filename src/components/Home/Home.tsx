@@ -28,8 +28,7 @@ const Home: FC<Props> = ({ cards, accounts, projects, cardsMeta, onNavigateToCar
         ? <NoFound/>
         : !size(cards)
           ? <NoFound text="No Basecamp cards found"/>
-          : cards.map((card) => {
-            return (
+          : cards.map((card) => (
             <Fragment key={card.id}>
               <CardItem
                 card={card}
@@ -39,7 +38,7 @@ const Home: FC<Props> = ({ cards, accounts, projects, cardsMeta, onNavigateToCar
               />
               <HorizontalDivider style={{ margin: "10px 0" }}/>
             </Fragment>
-          )})
+          ))
       }
     </Container>
   );

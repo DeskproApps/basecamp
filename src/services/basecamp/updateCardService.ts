@@ -9,7 +9,7 @@ const updateCardService = (
   cardId: Card["id"],
   data: object,
 ) => {
-  return baseRequest(client, {
+  return baseRequest<Card>(client, {
     url: `/${accountId}/buckets/${projectId}/card_tables/cards/${cardId}`,
     method: "PUT",
     data,

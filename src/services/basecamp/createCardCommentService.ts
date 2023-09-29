@@ -9,7 +9,7 @@ const createCardCommentService = (
   cardId: Card["id"],
   data: { content: CardComment["content"] },
 ) => {
-  return baseRequest(client, {
+  return baseRequest<CardComment>(client, {
     url: `/${accountId}/buckets/${projectId}/recordings/${cardId}/comments`,
     method: "POST",
     data,

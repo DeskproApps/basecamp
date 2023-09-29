@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback } from "react";
 import get from "lodash/get";
 import find from "lodash/find";
 import size from "lodash/size";
+import isEmpty from "lodash/isEmpty";
 import cloneDeep from "lodash/cloneDeep";
 import { useNavigate } from "react-router-dom";
 import {
@@ -10,9 +11,9 @@ import {
   useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
 import { setEntityService } from "../../services/deskpro";
-import { useSetTitle, useAsyncError } from "../../hooks";
+import { useSetTitle, useAsyncError, useLinkedAutoComment, useReplyBox } from "../../hooks";
 import { useSearchCards } from "./hooks";
-import { entity, filterCards } from "../../utils";
+import { entity, filterCards, getEntityMetadata } from "../../utils";
 import { LinkCards } from "../../components";
 import type { FC } from "react";
 import type { Maybe, TicketContext } from "../../types";
@@ -23,6 +24,8 @@ const LinkCardsPage: FC = () => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { asyncErrorHandler } = useAsyncError();
+  const { addLinkComment } = useLinkedAutoComment();
+  const { setSelectionState } = useReplyBox();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCards, setSelectedCards] = useState<Card[]>([]);
   const [selectedAccount, setSelectedAccount] = useState<Maybe<Account["id"]>>(null);
@@ -56,12 +59,18 @@ const LinkCardsPage: FC = () => {
     setSelectedCards(newSelectedCards);
   }, [selectedCards]);
 
+  const onChangeAccount = useCallback((accountId: Account["id"]) => {
+    setSelectedAccount(accountId);
+    setSelectedCardTable(null);
+    setSelectedCards([]);
+  }, []);
+
   const onCancel = useCallback(() => navigate("/home"), [navigate]);
 
   const onNavigateToCreate = useCallback(() => navigate("/cards/create"), [navigate]);
 
   const onLinkCards = useCallback(() => {
-    if (!client || !ticketId || !size(selectedCards)) {
+    if (!client || !ticketId || !size(selectedCards) || isEmpty(account)) {
       return;
     }
 
@@ -70,13 +79,28 @@ const LinkCardsPage: FC = () => {
     return Promise.all([
       ...selectedCards.map((card) => {
         const cardMeta = entity.generateId(account, card);
-        return !cardMeta ? Promise.resolve() : setEntityService(client, ticketId, cardMeta);
-      })
+        return !cardMeta
+          ? Promise.resolve()
+          : setEntityService(client, ticketId, cardMeta, getEntityMetadata(card, account));
+      }),
+      ...selectedCards.map((card) => addLinkComment({
+        accountId: get(account, ["id"]),
+        projectId: get(card, ["bucket", "id"]),
+        cardId: get(card, ["id"]),
+      })),
+      ...selectedCards.map((card) => {
+        const entityId = entity.generateId(account, card);
+        return !entityId ? Promise.resolve() : setSelectionState(entityId, true, "email");
+      }),
+      ...selectedCards.map((card) => {
+        const entityId = entity.generateId(account, card);
+        return !entityId ? Promise.resolve() : setSelectionState(entityId, true, "note");
+      }),
     ])
       .then(() => navigate("/home"))
       .catch(asyncErrorHandler)
       .finally(() => setIsSubmitting(false));
-  }, [client, ticketId, selectedCards, account, asyncErrorHandler, navigate]);
+  }, [client, ticketId, selectedCards, account, asyncErrorHandler, navigate, addLinkComment, setSelectionState]);
 
   useSetTitle("Link Cards");
 
@@ -102,7 +126,7 @@ const LinkCardsPage: FC = () => {
       selectedCards={selectedCards}
       onChangeSearch={onChangeSearch}
       selectedAccount={selectedAccount}
-      onChangeAccount={setSelectedAccount}
+      onChangeAccount={onChangeAccount}
       selectedCardTable={selectedCardTable}
       onChangeCardTable={setSelectedCardTable}
       onChangeSelectedCard={onChangeSelectedCard}

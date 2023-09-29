@@ -3,14 +3,17 @@ import { useNavigate, createSearchParams } from "react-router-dom";
 import { useDeskproElements, LoadingSpinner } from "@deskpro/app-sdk";
 import { useSetTitle, useSetBadgeCount, useLinkedCards } from "../../hooks";
 import { useHomeDeps } from "./hooks";
+import { entity } from "../../utils";
 import { Home } from "../../components";
 import type { FC } from "react";
+import type { CardMeta } from "../../types";
 import type { Card, Account, Project } from "../../services/basecamp/types";
 
 const HomePage: FC = () => {
   const navigate = useNavigate();
   const { isLoading: isLoadingLinked, cards, cardsMeta } = useLinkedCards();
   const { isLoading: isLoadingMeta, accounts, projects } = useHomeDeps();
+  const parsedCardsMeta = useMemo(() => cardsMeta.map(entity.parseId).filter(Boolean), [cardsMeta]);
 
   const isLoading = useMemo(() => {
     return [isLoadingLinked, isLoadingMeta].some(Boolean);
@@ -64,7 +67,7 @@ const HomePage: FC = () => {
       cards={cards}
       projects={projects}
       accounts={accounts}
-      cardsMeta={cardsMeta}
+      cardsMeta={parsedCardsMeta as CardMeta[]}
       onNavigateToCard={onNavigateToCard}
     />
   );

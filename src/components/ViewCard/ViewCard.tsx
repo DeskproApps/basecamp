@@ -2,7 +2,7 @@ import { HorizontalDivider } from "@deskpro/app-sdk";
 import { Container } from "../common";
 import { Details, Steps, Comments } from "./blocks";
 import type { FC } from "react";
-import type { Card, Project, Account, CardComment } from "../../services/basecamp/types";
+import type { Card, Project, Account, CardComment, CardStep } from "../../services/basecamp/types";
 
 type Props = {
   card: Card,
@@ -10,9 +10,20 @@ type Props = {
   project: Project,
   comments: CardComment[],
   onNavigateToAddComment: () => void,
+  onChangeStepComplete: (
+    stepId: CardStep["id"],
+    complete: boolean,
+  ) => Promise<CardStep|void>,
 };
 
-const ViewCard: FC<Props> = ({ card, account, project, comments, onNavigateToAddComment }) => {
+const ViewCard: FC<Props> = ({
+  card,
+  account,
+  project,
+  comments,
+  onChangeStepComplete,
+  onNavigateToAddComment,
+}) => {
   return (
     <>
       <Container>
@@ -22,7 +33,7 @@ const ViewCard: FC<Props> = ({ card, account, project, comments, onNavigateToAdd
       <HorizontalDivider />
 
       <Container>
-        <Steps card={card}/>
+        <Steps card={card} onChangeStepComplete={onChangeStepComplete}/>
       </Container>
 
       <HorizontalDivider />

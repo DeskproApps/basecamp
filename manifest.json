@@ -36,6 +36,31 @@
       "isRequired": false,
       "isBackendOnly": true,
       "order": 30
+    },
+    "add_comment_when_linking": {
+      "title": "Leave a comment on the card in Basecamp when it is linked to a ticket in Deskpro",
+      "description": "",
+      "type": "boolean",
+      "default": true,
+      "isRequired": false,
+      "isBackendOnly": false,
+      "order": 40
+    },
+    "default_comment_on_ticket_reply": {
+      "title": "Ticket reply as comment",
+      "description": "Enable option to add Deskpro replies as task comments when a Basecamp card is linked to a Deskpro ticket",
+      "type": "boolean",
+      "isRequired": false,
+      "isBackendOnly": false,
+      "order": 50
+    },
+    "default_comment_on_ticket_note": {
+      "title": "Ticket note as comment",
+      "description": "Enable option to add Deskpro notes as task comments when a Basecamp card is linked to a Deskpro ticket",
+      "type": "boolean",
+      "isRequired": false,
+      "isBackendOnly": false,
+      "order": 60
     }
   },
   "proxy": {
@@ -47,7 +72,7 @@
       },
       {
         "url": "https://launchpad.37signals.com/.*",
-        "methods": ["POST"],
+        "methods": ["GET", "POST"],
         "timeout": 20
       }
     ]

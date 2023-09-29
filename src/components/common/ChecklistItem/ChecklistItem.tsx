@@ -7,7 +7,7 @@ type Props = {
   name: string,
   checked: boolean,
   disabled?: boolean,
-  onComplete?: () => Promise<void>,
+  onComplete?: () => Promise<unknown>,
 };
 
 const ChecklistItem: FC<Props> = ({ name, checked, onComplete, disabled = false }) => {

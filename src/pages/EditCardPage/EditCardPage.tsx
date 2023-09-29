@@ -10,11 +10,14 @@ import {
 } from "@deskpro/app-sdk";
 import { useAsyncError, useSetTitle } from "../../hooks";
 import { useCard } from "./hooks";
+import { setEntityService } from "../../services/deskpro";
 import { changeCardColumnService, updateCardService } from "../../services/basecamp";
 import { getCardValues, getCardMeta, getColumnToChange } from "../../components/CardForm";
+import { entity, getEntityMetadata } from "../../utils";
 import { EditCard } from "../../components";
 import type { FC } from "react";
 import type { Maybe, CardMeta, TicketContext } from "../../types";
+import type { Account } from "../../services/basecamp/types";
 import type { FormValidationSchema } from "../../components/CardForm";
 
 const EditCardPage: FC = () => {
@@ -57,11 +60,14 @@ const EditCardPage: FC = () => {
     }
 
     return updateCardService(client, accountId, projectId, card.id, data)
-      .then(() => {
+      .then((card) => {
         const newColumnId = getColumnToChange(card, values);
-        return !newColumnId
-          ? Promise.resolve()
-          : changeCardColumnService(client, accountId, projectId, card.id, newColumnId);
+        const entityId = entity.generateId({ id: accountId } as Account, card);
+
+        return Promise.all([
+          !newColumnId  ? Promise.resolve() : changeCardColumnService(client, accountId, projectId, card.id, newColumnId),
+          !entityId ? Promise.resolve() : setEntityService(client, ticketId, entityId, getEntityMetadata(card)),
+        ]);
       })
       .then(() => navigate({
         pathname: `/cards/view`,
