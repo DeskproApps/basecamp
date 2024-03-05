@@ -24,7 +24,7 @@ export const AdminCallback: FC<{ callbackUrl?: Maybe<string> }> = ({ callbackUrl
   return (
     <>
       <CopyToClipboardInput value={callbackUrl} />
-      <Description>The callback URL will be required during MeisterTask app setup</Description>
+      <Description>The callback URL will be required during Basecamp app setup</Description>
     </>
   );
 };

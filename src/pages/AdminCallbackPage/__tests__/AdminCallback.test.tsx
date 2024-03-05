@@ -16,7 +16,7 @@ describe("VerifySettings", () => {
     const callbackInput = getByRole("textbox");
 
     expect(callbackInput).toHaveValue("https://deskpro.test/callback");
-    expect(await findByText(/The callback URL will be required during MeisterTask app setup/i)).toBeInTheDocument();
+    expect(await findByText(/The callback URL will be required during Basecamp app setup/i)).toBeInTheDocument();
   });
 
   test("should show the loader if there is no URL", async () => {
