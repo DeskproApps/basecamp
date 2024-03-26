@@ -72,6 +72,7 @@ const CardForm: FC<Props> = ({
       <Label htmlFor="project" label="Project" required>
         <Select<Project["id"]>
           id="project"
+          showInternalSearch
           disabled={isEditMode}
           value={watch("project")}
           options={projectOptions}

@@ -34,6 +34,7 @@ export type RequestParams = {
   data?: Dict<any>|RequestInit["body"]|V2ProxyRequestInitBody["body"],
   headers?: Dict<string>,
   queryParams?: string|Dict<string>|ParamKeyValuePair[],
+  pagination?: boolean;
 };
 
 export type Request = <T>(
