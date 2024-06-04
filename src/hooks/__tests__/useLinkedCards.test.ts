@@ -26,7 +26,7 @@ describe("useLinkedCards", () => {
     (getCardService as jest.Mock).mockResolvedValueOnce(mockCard);
 
     renderHook<Result, unknown>(() => useLinkedCards(), {
-      wrapper: ({ children }) => wrap(children, { query: true }),
+      wrapper: ({ children }) => wrap(children as never, { query: true }),
     });
 
     await waitFor(() => {
@@ -40,7 +40,7 @@ describe("useLinkedCards", () => {
     (getCardService as jest.Mock).mockResolvedValueOnce(mockCard);
 
     const { result } = renderHook<Result, unknown>(() => useLinkedCards(), {
-      wrapper: ({ children }) => wrap(children, { query: true }),
+      wrapper: ({ children }) => wrap(children as never, { query: true }),
     });
 
     await waitFor(() => {
