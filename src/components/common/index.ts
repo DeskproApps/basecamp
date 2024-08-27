@@ -1,6 +1,6 @@
 export { Button, AnchorButton } from "./Button";
 export { ErrorBlock } from "./ErrorBlock";
-export { Container } from "./Layout";
+export { Container, AppContainer } from "./Layout";
 export { Search } from "./Search";
 export { Label } from "./Label";
 export { Select } from "./Select";
