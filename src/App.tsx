@@ -71,22 +71,22 @@ const App: FC = () => {
 
   if (!client || isLoading) {
     return (
-      <LoadingSpinner/>
+      <LoadingSpinner />
     );
   }
 
   return (
     <AppContainer isAdmin={isAdmin}>
       <Routes>
-        <Route path="/admin/callback" element={<AdminCallbackPage/>}/>)
-        <Route path="/login" element={<LoginPage/>}/>)
-        <Route path="/home" element={<HomePage/>}/>)
-        <Route path="/cards/link" element={<LinkCardsPage/>}/>)
-        <Route path="/cards/view" element={<ViewCardPage/>}/>)
-        <Route path="/cards/create" element={<CreateCardPage/>}/>)
-        <Route path="/cards/edit" element={<EditCardPage/>}/>)
-        <Route path="/cards/comments/create" element={<CreateCardCommentPage/>} />
-        <Route index element={<LoadingAppPage/>} />
+        <Route path="/admin/callback" element={<AdminCallbackPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/cards/link" element={<LinkCardsPage />} />
+        <Route path="/cards/view" element={<ViewCardPage />} />
+        <Route path="/cards/create" element={<CreateCardPage />} />
+        <Route path="/cards/edit" element={<EditCardPage />} />
+        <Route path="/cards/comments/create" element={<CreateCardCommentPage />} />
+        <Route index element={<LoadingAppPage />} />
       </Routes>
     </AppContainer>
   );
