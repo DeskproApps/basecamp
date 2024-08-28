@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
 import { match } from "ts-pattern";
@@ -31,7 +30,7 @@ const App: FC = () => {
   const { client } = useDeskproAppClient();
   const { logout, isLoading: isLoadingLogout } = useLogout();
   const { unlink, isLoading: isLoadingUnlink } = useUnlinkCard();
-  const isAdmin = useMemo(() => pathname.includes("/admin/"), [pathname]);
+  const isAdmin = pathname.includes("/admin/");
   const isLoading = [isLoadingLogout, isLoadingUnlink].some((isLoading) => isLoading);
 
   useDeskproElements(({ registerElement, deRegisterElement }) => {
@@ -71,22 +70,22 @@ const App: FC = () => {
 
   if (!client || isLoading) {
     return (
-      <LoadingSpinner/>
+      <LoadingSpinner />
     );
   }
 
   return (
     <AppContainer isAdmin={isAdmin}>
       <Routes>
-        <Route path="/admin/callback" element={<AdminCallbackPage/>}/>)
-        <Route path="/login" element={<LoginPage/>}/>)
-        <Route path="/home" element={<HomePage/>}/>)
-        <Route path="/cards/link" element={<LinkCardsPage/>}/>)
-        <Route path="/cards/view" element={<ViewCardPage/>}/>)
-        <Route path="/cards/create" element={<CreateCardPage/>}/>)
-        <Route path="/cards/edit" element={<EditCardPage/>}/>)
-        <Route path="/cards/comments/create" element={<CreateCardCommentPage/>} />
-        <Route index element={<LoadingAppPage/>} />
+        <Route path="/admin/callback" element={<AdminCallbackPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/cards/link" element={<LinkCardsPage />} />
+        <Route path="/cards/view" element={<ViewCardPage />} />
+        <Route path="/cards/create" element={<CreateCardPage />} />
+        <Route path="/cards/edit" element={<EditCardPage />} />
+        <Route path="/cards/comments/create" element={<CreateCardCommentPage />} />
+        <Route index element={<LoadingAppPage />} />
       </Routes>
     </AppContainer>
   );
