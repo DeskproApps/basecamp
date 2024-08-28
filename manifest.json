@@ -2,7 +2,7 @@
   "name": "@deskpro-apps/basecamp",
   "title": "Basecamp",
   "description": "Link your Basecamp cards to your Deskpro tickets to streamline communication with users by making them easy to view and update.",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
