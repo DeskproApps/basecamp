@@ -3,7 +3,7 @@ import { proxyFetch } from "@deskpro/app-sdk";
 import { BASE_URL, placeholders } from "../../constants";
 import { getQueryParams, retryUntilHavePagination } from "../../utils";
 import { BasecampError } from "./BasecampError";
-import type { Request, FetchOptions } from "../../types";
+import type { Request } from "../../types";
 
 const baseRequest: Request = async (client, {
   url,
@@ -20,7 +20,7 @@ const baseRequest: Request = async (client, {
   const params = getQueryParams(queryParams);
 
   const requestUrl = `${baseUrl}.json?${isEmpty(params) ? "": `${params}`}`;
-  const options: FetchOptions = {
+  const options: RequestInit = {
     method,
     headers: {
       "Authorization": `Bearer ${placeholders.ACCESS_TOKEN}`,
