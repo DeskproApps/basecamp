@@ -1,12 +1,12 @@
 import { get, concat } from "lodash";
 import { updatePaginationUrl } from "../utils";
-import type { Fetch, V2ProxyRequestInit } from "@deskpro/app-sdk";
+import type { Fetch } from "@deskpro/app-sdk";
 
 type PromiseCallback<T> = (url: string) => Promise<T>;
 
 const retryUntilHavePagination = <T>(
   dpFetch: Fetch,
-  options: V2ProxyRequestInit,
+  options: RequestInit,
 ) => {
   return (requestUrl: string): Promise<T[]> => {
     let result: T[] = [];
