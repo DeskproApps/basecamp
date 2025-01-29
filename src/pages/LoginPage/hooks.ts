@@ -49,7 +49,7 @@ const useLogin = (): Result => {
   );
 
   useEffect(() => {
-    if (callback?.callbackUrl) {
+    if (callback?.callbackUrl && clientId) {
       setAuthUrl(`${AUTH_URL}/new?${getQueryParams({
         type: "web_server",
         client_id: clientId,
@@ -60,7 +60,7 @@ const useLogin = (): Result => {
   }, [callback, clientId, key]);
 
   const poll = useCallback(() => {
-    if (!client || !callback?.poll) {
+    if (!client || !callback?.poll || !ticketId) {
       return;
     }
 

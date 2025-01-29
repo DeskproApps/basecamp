@@ -17,7 +17,7 @@ export type Result = {
 };
 
 const useLinkedCards = (): Result => {
-  const { context } = useDeskproLatestAppContext() as { context: TicketContext };
+  const { context } = useDeskproLatestAppContext<unknown, unknown>();
   const ticketId = useMemo(() => get(context, ["data", "ticket", "id"]), [context]);
 
   const linkedIds = useQueryWithClient(
