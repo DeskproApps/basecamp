@@ -7,7 +7,7 @@ import { getCardService } from "../services/basecamp";
 import { useQueriesWithClient } from "./useQueriesWithClient";
 import { entity } from "../utils";
 import { QueryKey } from "../query";
-import type { CardMetaAsString } from "../types";
+import type { CardMetaAsString, TicketContext } from "../types";
 import type { Card } from "../services/basecamp/types";
 
 export type Result = {
@@ -17,7 +17,7 @@ export type Result = {
 };
 
 const useLinkedCards = (): Result => {
-  const { context } = useDeskproLatestAppContext<unknown, unknown>();
+  const { context } = useDeskproLatestAppContext<TicketContext, unknown>();
   const ticketId = useMemo(() => get(context, ["data", "ticket", "id"]), [context]);
 
   const linkedIds = useQueryWithClient(
