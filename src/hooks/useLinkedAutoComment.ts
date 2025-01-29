@@ -33,7 +33,7 @@ const useLinkedAutoComment = (): Result => {
   const addLinkComment = useCallback((cardMeta?: CardMeta) => {
     const { cardId, accountId, projectId } = cardMeta || {};
 
-    if (!client || !isEnable || !accountId || !projectId || !cardId) {
+    if (!client || !isEnable || !accountId || !projectId || !cardId || !ticketId) {
       return Promise.resolve();
     }
 
@@ -51,7 +51,7 @@ const useLinkedAutoComment = (): Result => {
   const addUnlinkComment = useCallback((cardMeta?: CardMeta) => {
     const { cardId, accountId, projectId } = cardMeta || {};
 
-    if (!client || !isEnable || !accountId || !projectId || !cardId) {
+    if (!client || !isEnable || !accountId || !projectId || !cardId || !ticketId) {
       return Promise.resolve();
     }
 

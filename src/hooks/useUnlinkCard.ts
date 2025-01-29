@@ -35,7 +35,7 @@ const useUnlinkCard = (): Result => {
     const accountId = get(meta, ["accountId"]);
     const entityId = entity.generateId({ id: accountId } as Account, card);
 
-    if (!client || isEmpty(card) || !entityId) {
+    if (!client || isEmpty(card) || !entityId || !ticketId) {
       return;
     }
 
