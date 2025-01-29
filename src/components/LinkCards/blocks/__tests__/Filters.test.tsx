@@ -18,6 +18,10 @@ const renderFilters = (props?: Props) => render((
 
 describe("LinkCards", () => {
   describe("Filters", () => {
+    beforeAll(() => {
+      window.HTMLElement.prototype.scrollTo = jest.fn();
+    });
+
     afterEach(() => {
       jest.clearAllMocks();
       cleanup();

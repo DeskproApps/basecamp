@@ -30,7 +30,7 @@ const useHomeDeps = (): Result => {
   })));
 
   return {
-    isLoading: [accounts].some(({ isLoading }) => isLoading),
+    isLoading: [accountsFetched].some(({ isLoading }) => isLoading),
     accounts,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
