@@ -7,7 +7,7 @@ import { getCardService } from "../services/basecamp";
 import { useQueriesWithClient } from "./useQueriesWithClient";
 import { entity } from "../utils";
 import { QueryKey } from "../query";
-import type { TicketContext, CardMetaAsString } from "../types";
+import type { CardMetaAsString } from "../types";
 import type { Card } from "../services/basecamp/types";
 
 export type Result = {
