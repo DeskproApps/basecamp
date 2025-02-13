@@ -62,7 +62,7 @@ const useLogin = (): Result => {
           };
         }
       )
-      : await client.startOauth2Global('global');
+      : await client.startOauth2Global('8d2b057a581fe67e9e460efa0fb4fd511cf72ba3');
 
     setAuthUrl(oauth2.authorizationUrl);
     setError(null);

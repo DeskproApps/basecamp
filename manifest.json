@@ -7,6 +7,7 @@
   "isSingleInstall": false,
   "hasDevMode": true,
   "serveUrl": "https://apps-cdn.deskpro-service.com/__name__/__version__",
+  "secrets": "hLVbypcW4bZjR/TtSxgGl30ZcUAqoIh5WM835NTJ63hQ7DjVfNPCpKrrGqSB8B9v90UJrS7RIMdPhNxKNrYeAl8qlwC+oKo6IlDWWZp1l0ItMto4PKz7TM7ivO6A+Y92X6z4vsVxKtqG396WAM8B8U0tGKTFjYsfc23Lb8VOiJ80yPRKW9/UKA1KMC2xmM0NZnF/gM/Zs0Sq9eBSCpyfPUjACyaRI4Bd2EKuPCD1d1UkrDfzilTQqnplbAFMC9mKKf2g4CfsLONQkS6d9rwRUjdg7XevMljlpxLRZGcDQsJ9qYvEBkHQgeIAeuArdt9Q2DbGscs+hj3Y/eGwPpHmEZ6O4NlMMdAmfh6IFFMG0HfqfvX8sSXSHzw6gisDA5oNyC+9U2hCIb4Cv+AoTIh6i3scXCUBxdGwcpC/SGJ+gEVf4DBDGmp37KPQFknQ2u8RanSXGq/LEmon7CMqPIvbtJMMNsi+bOt9CbKSabI2DXG0pLpsbDT0b41v1lersooiVakj08B80tqg4OjAl0dtvICIyTi10i9d5+14QHjJ/KjQ4iHX463mTlZ8i4gVibLXQ/wj+0/MLKbyuUPeWcfMyv2vzfiEqVk8tzNzoni/r+h68+pyvXTsphdy+DJwBPDufqwZ8LeTcOGRejRtLWB9XYj+van2pv9VW5Mn74VNlsI=",
   "appStoreUrl": "https://www.deskpro.com/product-embed/apps/basecamp",
   "targets": [{ "target": "ticket_sidebar", "entrypoint": "index.html" }],
   "entityAssociations": {
