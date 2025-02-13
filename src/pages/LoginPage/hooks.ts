@@ -1,10 +1,8 @@
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 import get from "lodash/get";
 import size from "lodash/size";
 import {
-  useDeskproAppClient,
   useDeskproLatestAppContext,
   useInitialisedDeskproAppClient,
 } from "@deskpro/app-sdk";
@@ -17,75 +15,85 @@ import {
 } from "../../services/basecamp";
 import { getQueryParams } from "../../utils";
 import { AUTH_URL, DEFAULT_ERROR } from "../../constants";
-import type { OAuth2StaticCallbackUrl } from "@deskpro/app-sdk";
-import type { Maybe, TicketContext } from "../../types";
+import type { Maybe, Settings } from "../../types";
 
 export type Result = {
-  poll: () => void,
-  authUrl: string|null,
+  onLogIn: () => void,
+  authUrl: string,
   error: Maybe<string>,
   isLoading: boolean,
 };
 
 const useLogin = (): Result => {
-  const key = useMemo(() => uuidv4(), []);
+  const callbackURLRef = useRef('');
   const navigate = useNavigate();
   const [error, setError] = useState<Maybe<string>>(null);
-  const [callback, setCallback] = useState<OAuth2StaticCallbackUrl|undefined>();
-  const [authUrl, setAuthUrl] = useState<string|null>(null);
+  const [authUrl, setAuthUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { context } = useDeskproLatestAppContext() as { context: TicketContext };
-  const { client } = useDeskproAppClient();
-  const clientId = useMemo(() => get(context, ["settings", "client_id"]), [context]);
+  const { context } = useDeskproLatestAppContext<unknown, Settings>();
   const ticketId = useMemo(() => get(context, ["data", "ticket", "id"]), [context]);
 
-  useInitialisedDeskproAppClient(
-    (client) => {
-      client.oauth2()
-        .getGenericCallbackUrl(key, /code=(?<token>[\d\w]+)/, /state=(?<key>.+)/)
-        .then(setCallback);
-    },
-    [setCallback]
-  );
+  useInitialisedDeskproAppClient(async client => {
+    if (context?.settings.use_deskpro_saas === undefined) return;
 
-  useEffect(() => {
-    if (callback?.callbackUrl && clientId) {
-      setAuthUrl(`${AUTH_URL}/new?${getQueryParams({
-        type: "web_server",
-        client_id: clientId,
-        redirect_uri: callback.callbackUrl,
-        state: key,
-      })}`);
-    }
-  }, [callback, clientId, key]);
+    const clientID = context.settings.client_id;
+    const mode = context?.settings.use_deskpro_saas ? 'global' : 'local';
 
-  const poll = useCallback(() => {
-    if (!client || !callback?.poll || !ticketId) {
-      return;
-    }
+    if (mode === 'local' && typeof clientID !== 'string') return;
 
-    setError(null);
-    setTimeout(() => setIsLoading(true), 1000);
+    const oauth2 = mode === 'local'
+      ? await client.startOauth2Local(
+        ({ callbackUrl, state }) => {
+          callbackURLRef.current = callbackUrl;
 
-    callback.poll()
-      .then(({ token }) => getAccessTokenService(client, token, callback.callbackUrl))
-      .then(({ access_token }) => setAccessTokenService(client, access_token))
-      .then(() => getAuthInfoService(client))
-      .then((info) => {
-        if (!get(info, ["identity", "id"])) {
-          return Promise.reject(new Error("No identity found"));
-        } else {
-          return getEntityListService(client, ticketId)
+          return `${AUTH_URL}/new?${getQueryParams({
+            type: 'web_server',
+            client_id: clientID,
+            state,
+            redirect_uri: callbackUrl
+          })}`
+        },
+        /code=(?<code>[\d\w]+)/,
+        async code => {
+          const { access_token } = await getAccessTokenService(client, code, callbackURLRef.current);
+
+          return {
+            data: { access_token }
+          };
         }
-      })
-      .then((entityIds) => navigate(size(entityIds) ? "/home" : "/cards/link"))
-      .catch((err) => {
-        setIsLoading(false);
-        setError(get(err, ["data", "error"]) || get(err, ["message"]) || DEFAULT_ERROR);
-      });
-  }, [client, callback, navigate, ticketId]);
+      )
+      : await client.startOauth2Global('global');
 
-  return { authUrl, poll, error, isLoading };
+    setAuthUrl(oauth2.authorizationUrl);
+    setError(null);
+
+    try {
+      const pollResult = await oauth2.poll();
+
+      await setAccessTokenService(client, pollResult.data.access_token);
+
+      const authInfo = await getAuthInfoService(client);
+
+      if (!authInfo.identity.id) {
+        await Promise.reject(new Error('No Identity Found'));
+      };
+
+      const entityIDs = await getEntityListService(client, ticketId);
+
+      navigate(size(entityIDs) ? '/home' : '/cards/link');
+    } catch (error) {
+      setError(get(error, ['data', 'error']) || get(error, ['message']) || DEFAULT_ERROR);
+    } finally {
+      setIsLoading(false);
+    };
+  }, []);
+
+  const onLogIn = useCallback(() => {
+    setIsLoading(true);
+    window.open(authUrl, '_blank');
+  }, [setIsLoading, authUrl]);
+
+  return { authUrl, onLogIn, error, isLoading };
 };
 
 export { useLogin };
