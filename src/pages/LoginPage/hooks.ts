@@ -34,12 +34,16 @@ const useLogin = (): Result => {
   const ticketId = useMemo(() => get(context, ["data", "ticket", "id"]), [context]);
 
   useInitialisedDeskproAppClient(async client => {
-    if (context?.settings.use_deskpro_saas === undefined) return;
+    if (context?.settings.use_deskpro_saas === undefined) {
+      return;
+    };
 
     const clientID = context.settings.client_id;
     const mode = context?.settings.use_deskpro_saas ? 'global' : 'local';
 
-    if (mode === 'local' && typeof clientID !== 'string') return;
+    if (mode === 'local' && typeof clientID !== 'string') {
+      return;
+    };
 
     const oauth2 = mode === 'local'
       ? await client.startOauth2Local(
@@ -55,11 +59,9 @@ const useLogin = (): Result => {
         },
         /code=(?<code>[\d\w]+)/,
         async code => {
-          const { access_token } = await getAccessTokenService(client, code, callbackURLRef.current);
+          const data = await getAccessTokenService(client, code, callbackURLRef.current);
 
-          return {
-            data: { access_token }
-          };
+          return { data };
         }
       )
       : await client.startOauth2Global('8d2b057a581fe67e9e460efa0fb4fd511cf72ba3');
@@ -75,14 +77,18 @@ const useLogin = (): Result => {
       const authInfo = await getAuthInfoService(client);
 
       if (!authInfo.identity.id) {
-        await Promise.reject(new Error('No Identity Found'));
+        throw new Error('No Identity Found');
       };
 
       const entityIDs = await getEntityListService(client, ticketId);
 
       navigate(size(entityIDs) ? '/home' : '/cards/link');
     } catch (error) {
-      setError(get(error, ['data', 'error']) || get(error, ['message']) || DEFAULT_ERROR);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError(DEFAULT_ERROR);
+      };
     } finally {
       setIsLoading(false);
     };
