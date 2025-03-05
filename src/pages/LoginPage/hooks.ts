@@ -14,7 +14,7 @@ import {
   getAccessTokenService, getAuthInfoService,
 } from "../../services/basecamp";
 import { getQueryParams } from "../../utils";
-import { AUTH_URL, DEFAULT_ERROR } from "../../constants";
+import { AUTH_URL, DEFAULT_ERROR, GLOBAL_CLIENT_ID } from "../../constants";
 import type { Maybe, Settings } from "../../types";
 
 export type Result = {
@@ -45,26 +45,24 @@ const useLogin = (): Result => {
       return;
     };
 
-    const oauth2 = mode === 'local'
-      ? await client.startOauth2Local(
-        ({ callbackUrl, state }) => {
-          callbackURLRef.current = callbackUrl;
+    const oauth2 = mode === 'global' ? await client.startOauth2Global(GLOBAL_CLIENT_ID) : await client.startOauth2Local(
+      ({ callbackUrl, state }) => {
+        callbackURLRef.current = callbackUrl;
 
-          return `${AUTH_URL}/new?${getQueryParams({
-            type: 'web_server',
-            client_id: clientID,
-            state,
-            redirect_uri: callbackUrl
-          })}`
-        },
-        /code=(?<code>[\d\w]+)/,
-        async code => {
-          const data = await getAccessTokenService(client, code, callbackURLRef.current);
+        return `${AUTH_URL}/new?${getQueryParams({
+          type: 'web_server',
+          client_id: clientID,
+          state,
+          redirect_uri: callbackUrl
+        })}`
+      },
+      /code=(?<code>[\d\w]+)/,
+      async code => {
+        const data = await getAccessTokenService(client, code, callbackURLRef.current);
 
-          return { data };
-        }
-      )
-      : await client.startOauth2Global('8d2b057a581fe67e9e460efa0fb4fd511cf72ba3');
+        return { data };
+      }
+    );
 
     setAuthUrl(oauth2.authorizationUrl);
     setError(null);
