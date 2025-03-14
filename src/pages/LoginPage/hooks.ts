@@ -100,6 +100,7 @@ const useLogin = (): Result => {
           setError(DEFAULT_ERROR);
         };
       } finally {
+        setIsPolling(false);
         setIsLoading(false);
       };
     };
