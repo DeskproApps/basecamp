@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import get from "lodash/get";
 import size from "lodash/size";
 import {
+  IOAuth2,
   useDeskproLatestAppContext,
   useInitialisedDeskproAppClient,
 } from "@deskpro/app-sdk";
@@ -32,6 +33,8 @@ const useLogin = (): Result => {
   const [isLoading, setIsLoading] = useState(false);
   const { context } = useDeskproLatestAppContext<unknown, Settings>();
   const ticketId = useMemo(() => get(context, ["data", "ticket", "id"]), [context]);
+  const [isPolling, setIsPolling] = useState(false);
+  const [oAuth2Context, setOAuth2Context] = useState<IOAuth2 | null>(null);
 
   useInitialisedDeskproAppClient(async client => {
     if (context?.settings.use_deskpro_saas === undefined) {
@@ -45,7 +48,7 @@ const useLogin = (): Result => {
       return;
     };
 
-    const oauth2 = mode === 'global' ? await client.startOauth2Global(GLOBAL_CLIENT_ID) : await client.startOauth2Local(
+    const oauth2Response = mode === 'global' ? await client.startOauth2Global(GLOBAL_CLIENT_ID) : await client.startOauth2Local(
       ({ callbackUrl, state }) => {
         callbackURLRef.current = callbackUrl;
 
@@ -64,36 +67,51 @@ const useLogin = (): Result => {
       }
     );
 
-    setAuthUrl(oauth2.authorizationUrl);
+    setAuthUrl(oauth2Response.authorizationUrl);
+    setOAuth2Context(oauth2Response);
     setError(null);
+  }, [context, navigate]);
 
-    try {
-      const pollResult = await oauth2.poll();
 
-      await setAccessTokenService(client, pollResult.data.access_token);
-
-      const authInfo = await getAuthInfoService(client);
-
-      if (!authInfo.identity.id) {
-        throw new Error('No Identity Found');
-      };
-
-      const entityIDs = await getEntityListService(client, ticketId);
-
-      navigate(size(entityIDs) ? '/home' : '/cards/link');
-    } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError(DEFAULT_ERROR);
-      };
-    } finally {
-      setIsLoading(false);
+  useInitialisedDeskproAppClient(client => {
+    if (!oAuth2Context) {
+      return;
     };
-  }, []);
+
+    const startPolling = async () => {
+      try {
+        const pollResult = await oAuth2Context.poll();
+
+        await setAccessTokenService(client, pollResult.data.access_token);
+
+        const authInfo = await getAuthInfoService(client);
+
+        if (!authInfo.identity.id) {
+          throw new Error('No Identity Found');
+        };
+
+        const entityIDs = await getEntityListService(client, ticketId);
+
+        navigate(size(entityIDs) ? '/home' : '/cards/link');
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError(DEFAULT_ERROR);
+        };
+      } finally {
+        setIsLoading(false);
+      };
+    };
+
+    if (isPolling) {
+      startPolling();
+    };
+  }, [oAuth2Context, navigate, isPolling]);
 
   const onLogIn = useCallback(() => {
     setIsLoading(true);
+    setIsPolling(true);
     window.open(authUrl, '_blank');
   }, [setIsLoading, authUrl]);
 
