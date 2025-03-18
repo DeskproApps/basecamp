@@ -2,7 +2,7 @@
   "name": "@deskpro-apps/basecamp",
   "title": "Basecamp",
   "description": "Link your Basecamp cards to your Deskpro tickets to streamline communication with users by making them easy to view and update.",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
@@ -46,10 +46,7 @@
     "callback_url": {
       "title": "Callback URL",
       "type": "app_embedded",
-      "options": {
-        "entrypoint": "#/admin/callback",
-        "height": "100px"
-      },
+      "options": { "entrypoint": "#/admin/callback", "height": "100px" },
       "isRequired": false,
       "isBackendOnly": true,
       "condition": "settings.use_advanced_connect != false",
