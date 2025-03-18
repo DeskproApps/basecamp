@@ -34,7 +34,7 @@ const useLogin = (): Result => {
   const [oAuth2Context, setOAuth2Context] = useState<IOAuth2 | null>(null);
 
   useInitialisedDeskproAppClient(async client => {
-    if (context?.settings.use_advanced_connect === undefined) {
+    if (!context?.settings) {
       return;
     };
 
