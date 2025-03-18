@@ -1,7 +1,5 @@
-import { useState, useCallback, useMemo, useRef } from "react";
+import { useState, useCallback, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
-import get from "lodash/get";
-import size from "lodash/size";
 import {
   IOAuth2,
   useDeskproLatestAppContext,
@@ -16,7 +14,7 @@ import {
 } from "../../services/basecamp";
 import { getQueryParams } from "../../utils";
 import { AUTH_URL, DEFAULT_ERROR, GLOBAL_CLIENT_ID } from "../../constants";
-import type { Maybe, Settings } from "../../types";
+import type { Maybe, Settings, TicketData } from '../../types';
 
 export type Result = {
   onLogIn: () => void,
@@ -31,8 +29,7 @@ const useLogin = (): Result => {
   const [error, setError] = useState<Maybe<string>>(null);
   const [authUrl, setAuthUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { context } = useDeskproLatestAppContext<unknown, Settings>();
-  const ticketId = useMemo(() => get(context, ["data", "ticket", "id"]), [context]);
+  const { context } = useDeskproLatestAppContext<TicketData, Settings>();
   const [isPolling, setIsPolling] = useState(false);
   const [oAuth2Context, setOAuth2Context] = useState<IOAuth2 | null>(null);
 
@@ -74,7 +71,9 @@ const useLogin = (): Result => {
 
 
   useInitialisedDeskproAppClient(client => {
-    if (!oAuth2Context) {
+    const ticketID = context?.data?.ticket.id;
+
+    if (!oAuth2Context || !ticketID) {
       return;
     };
 
@@ -90,9 +89,9 @@ const useLogin = (): Result => {
           throw new Error('No Identity Found');
         };
 
-        const entityIDs = await getEntityListService(client, ticketId);
+        const entityIDs = await getEntityListService(client, ticketID);
 
-        navigate(size(entityIDs) ? '/home' : '/cards/link');
+        navigate(entityIDs.length > 0 ? '/home' : '/cards/link');
       } catch (error) {
         if (error instanceof Error) {
           setError(error.message);
@@ -108,7 +107,7 @@ const useLogin = (): Result => {
     if (isPolling) {
       startPolling();
     };
-  }, [oAuth2Context, navigate, isPolling]);
+  }, [context, oAuth2Context, navigate, isPolling]);
 
   const onLogIn = useCallback(() => {
     setIsLoading(true);
