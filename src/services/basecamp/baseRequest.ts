@@ -40,6 +40,26 @@ const baseRequest: Request = async (client, {
 
   if (!pagination) {
     const res = await dpFetch(requestUrl, options);
+    // Provide a detailed error message if the user's account is inactive.
+    // Source: https://github.com/basecamp/bc3-api?tab=readme-ov-file#404-not-found
+    if (res.status === 404) {
+      const reason = res.headers.get("Reason");
+
+      if (reason === "Account Inactive") {
+        throw new BasecampError({
+          status: 404,
+          data: {
+            status: 404,
+            error: "Your Basecamp account is inactive. Please check your subscription or re-enable the account."
+          },
+        });
+      } else {
+        throw new BasecampError({
+          status: 404,
+          data: await res.json(),
+        });
+      }
+    }
 
     if (res.status < 200 || res.status > 399) {
       throw new BasecampError({
