@@ -2,14 +2,9 @@ import { BasecampError } from "../../services/basecamp";
 import { Container, ErrorBlock } from "../common";
 import { DEFAULT_ERROR } from "../../constants";
 import { Stack } from "@deskpro/deskpro-ui";
-import type { FallbackProps } from "react-error-boundary";
-import type { FC } from "react";
+import { FallbackRender } from "@sentry/react";
 
-type Props = Omit<FallbackProps, "error"> & {
-  error: Error,
-};
-
-const ErrorFallback: FC<Props> = ({ error }) => {
+const ErrorFallback: FallbackRender = ({ error }) => {
   let message = DEFAULT_ERROR;
   const button = null;
 
